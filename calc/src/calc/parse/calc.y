@@ -22,13 +22,13 @@
 		IDENT
 %type <ast_value> expression primary
 %left EQUAL NOTEQUAL
-%left ADD SUB
-%left MUL DIV MOD
-%left BIT_AND
-%left EXC_OR
-%left BIT_OR
 %left LOGIC_AND
 %left LOGIC_OR
+%left BIT_OR
+%left EXC_OR
+%left BIT_AND
+%left ADD SUB
+%left MUL DIV MOD
 %left NEGATIVE POSITIVE
 %right ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
 %%
@@ -91,11 +91,11 @@ expression
 	}
 	| expression LOGIC_OR expression
 	{
-		$$ = ast_new_binary(ast_bit_or, $1, $3);
+		$$ = ast_new_binary(ast_logic_or, $1, $3);
 	}
 	| expression LOGIC_AND expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_logic_and, $1, $3);
 	}
 	| expression ASSIGN expression
 	{
