@@ -60,13 +60,15 @@
      GE = 276,
      LT = 277,
      LE = 278,
-     NOT = 279,
-     BIT_AND = 280,
-     BIT_OR = 281,
-     LOGIC_AND = 282,
-     LOGIC_OR = 283,
-     IDENT = 284,
-     DiV = 285
+     LSHIFT = 279,
+     RSHIFT = 280,
+     NOT = 281,
+     BIT_AND = 282,
+     BIT_OR = 283,
+     LOGIC_AND = 284,
+     LOGIC_OR = 285,
+     IDENT = 286,
+     DiV = 287
    };
 #endif
 /* Tokens.  */
@@ -91,13 +93,15 @@
 #define GE 276
 #define LT 277
 #define LE 278
-#define NOT 279
-#define BIT_AND 280
-#define BIT_OR 281
-#define LOGIC_AND 282
-#define LOGIC_OR 283
-#define IDENT 284
-#define DiV 285
+#define LSHIFT 279
+#define RSHIFT 280
+#define NOT 281
+#define BIT_AND 282
+#define BIT_OR 283
+#define LOGIC_AND 284
+#define LOGIC_OR 285
+#define IDENT 286
+#define DiV 287
 
 
 
@@ -110,7 +114,7 @@ typedef union YYSTYPE
 	char* svalue;
 }
 /* Line 1529 of yacc.c.  */
-#line 114 "calc.tab.h"
+#line 118 "calc.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

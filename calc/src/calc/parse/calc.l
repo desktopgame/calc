@@ -165,6 +165,8 @@ static void update_loc() {
 <INITIAL>"=="				{ return (EQUAL); }
 <INITIAL>"!="				{ return (NOTEQUAL); }
 
+<INITIAL>"<<"				{ return (LSHIFT); }
+<INITIAL>">>"				{ return (RSHIFT); }
 
 <INITIAL>"++"				{ return (INC); }
 <INITIAL>"--"				{ return (DEC); }

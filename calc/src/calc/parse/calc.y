@@ -16,12 +16,14 @@
 %token 	ADD SUB MUL DIV MOD
 		ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
 		EQUAL NOTEQUAL INC DEC
-		GT GE LT LE
+		GT GE LT LE LSHIFT RSHIFT
 		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR
 		IDENT
 %type <ast_value> expression
 %left ADD SUB
 %left MUL DiV MOD
+%left BIT_AND
+%left BIT_OR
 %%
 program
 	: expression
@@ -52,6 +54,14 @@ expression
 	| expression MOD expression
 	{
 		$$ = ast_new_binary(ast_mod, $1, $3);
+	}
+	| expression BIT_OR expression
+	{
+		$$ = ast_new_binary(ast_bit_or, $1, $3);
+	}
+	| expression BIT_AND expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
 	}
 	;
 %%
