@@ -18,11 +18,13 @@
 		EQUAL NOTEQUAL INC DEC
 		GT GE LT LE LSHIFT RSHIFT
 		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR LP RP
+		EXC_OR
 		IDENT
 %type <ast_value> expression primary
 %left ADD SUB
 %left MUL DIV MOD
 %left BIT_AND
+%left EXC_OR
 %left BIT_OR
 %left LOGIC_AND
 %left LOGIC_OR
@@ -65,6 +67,10 @@ expression
 	| expression BIT_AND expression
 	{
 		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression EXC_OR expression
+	{
+		$$ = ast_new_binary(ast_exc_or, $1, $3);
 	}
 	| expression LOGIC_OR expression
 	{

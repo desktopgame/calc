@@ -180,6 +180,7 @@ static void update_loc() {
 <INITIAL>"&&"			{ return (LOGIC_AND); }
 <INITIAL>"|"				{ return (BIT_OR); }
 <INITIAL>"||"			{ return (LOGIC_OR); }
+<INITIAL>"^"			{ return (EXC_OR); }
 
 <INITIAL>"("				{ return (LP); }
 <INITIAL>")"			{ return (RP); }

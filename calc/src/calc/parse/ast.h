@@ -18,6 +18,7 @@ typedef enum ast_tag {
 	ast_bit_or,
 	ast_logic_and,
 	ast_logic_or,
+	ast_exc_or,
 
 	ast_assign,
 	ast_add_assign,

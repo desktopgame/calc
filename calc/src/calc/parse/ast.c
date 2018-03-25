@@ -101,6 +101,7 @@ double ast_eval(ast* self) {
 		case ast_bit_and: return (int)ast_eval(ast_first(self)) & (int)ast_eval(ast_second(self));
 		case ast_logic_or: return (int)ast_eval(ast_first(self)) || (int)ast_eval(ast_second(self));
 		case ast_logic_and: return (int)ast_eval(ast_first(self)) && (int)ast_eval(ast_second(self));
+		case ast_exc_or: return (int)ast_eval(ast_first(self)) ^ (int)ast_eval(ast_second(self));
 
 		case ast_assign:
 		case ast_add_assign:

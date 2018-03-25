@@ -28,37 +28,38 @@ Grammar
     7           | expression MOD expression
     8           | expression BIT_OR expression
     9           | expression BIT_AND expression
-   10           | expression LOGIC_OR expression
-   11           | expression LOGIC_AND expression
-   12           | expression ASSIGN expression
-   13           | expression ADD_ASSIGN expression
-   14           | expression SUB_ASSIGN expression
-   15           | expression MUL_ASSIGN expression
-   16           | expression DIV_ASSIGN expression
-   17           | expression MOD_ASSIGN expression
-   18           | LP expression RP
+   10           | expression EXC_OR expression
+   11           | expression LOGIC_OR expression
+   12           | expression LOGIC_AND expression
+   13           | expression ASSIGN expression
+   14           | expression ADD_ASSIGN expression
+   15           | expression SUB_ASSIGN expression
+   16           | expression MUL_ASSIGN expression
+   17           | expression DIV_ASSIGN expression
+   18           | expression MOD_ASSIGN expression
+   19           | LP expression RP
 
-   19 primary: INT
-   20        | DOUBLE
+   20 primary: INT
+   21        | DOUBLE
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-INT (258) 19
-DOUBLE (259) 20
+INT (258) 20
+DOUBLE (259) 21
 ADD (260) 3
 SUB (261) 4
 MUL (262) 5
 DIV (263) 6
 MOD (264) 7
-ASSIGN (265) 12
-ADD_ASSIGN (266) 13
-SUB_ASSIGN (267) 14
-MUL_ASSIGN (268) 15
-DIV_ASSIGN (269) 16
-MOD_ASSIGN (270) 17
+ASSIGN (265) 13
+ADD_ASSIGN (266) 14
+SUB_ASSIGN (267) 15
+MUL_ASSIGN (268) 16
+DIV_ASSIGN (269) 17
+MOD_ASSIGN (270) 18
 EQUAL (271)
 NOTEQUAL (272)
 INC (273)
@@ -72,24 +73,25 @@ RSHIFT (280)
 NOT (281)
 BIT_AND (282) 9
 BIT_OR (283) 8
-LOGIC_AND (284) 11
-LOGIC_OR (285) 10
-LP (286) 18
-RP (287) 18
-IDENT (288)
+LOGIC_AND (284) 12
+LOGIC_OR (285) 11
+LP (286) 19
+RP (287) 19
+EXC_OR (288) 10
+IDENT (289)
 
 
 Nonterminals, with rules where they appear
 
-$accept (34)
+$accept (35)
     on left: 0
-program (35)
+program (36)
     on left: 1, on right: 0
-expression (36)
-    on left: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18,
-    on right: 1 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
-primary (37)
-    on left: 19 20, on right: 2
+expression (37)
+    on left: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19,
+    on right: 1 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+primary (38)
+    on left: 20 21, on right: 2
 
 
 state 0
@@ -104,17 +106,18 @@ state 0
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -127,16 +130,16 @@ state 0
 
 state 1
 
-   19 primary: INT .
+   20 primary: INT .
 
-    $default  reduce using rule 19 (primary)
+    $default  reduce using rule 20 (primary)
 
 
 state 2
 
-   20 primary: DOUBLE .
+   21 primary: DOUBLE .
 
-    $default  reduce using rule 20 (primary)
+    $default  reduce using rule 21 (primary)
 
 
 state 3
@@ -149,18 +152,19 @@ state 3
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   18           | LP . expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   19           | LP . expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -187,14 +191,15 @@ state 5
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ADD         shift, and go to state 9
     SUB         shift, and go to state 10
@@ -211,6 +216,7 @@ state 5
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 1 (program)
 
@@ -231,15 +237,16 @@ state 7
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
-   18           | LP expression . RP
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
+   19           | LP expression . RP
 
     ADD         shift, and go to state 9
     SUB         shift, and go to state 10
@@ -256,7 +263,8 @@ state 7
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
-    RP          shift, and go to state 24
+    RP          shift, and go to state 25
+    EXC_OR      shift, and go to state 24
 
 
 state 8
@@ -277,23 +285,24 @@ state 9
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 25
+    expression  go to state 26
     primary     go to state 6
 
 
@@ -308,23 +317,24 @@ state 10
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 26
+    expression  go to state 27
     primary     go to state 6
 
 
@@ -339,23 +349,24 @@ state 11
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 27
+    expression  go to state 28
     primary     go to state 6
 
 
@@ -370,23 +381,24 @@ state 12
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 28
+    expression  go to state 29
     primary     go to state 6
 
 
@@ -401,23 +413,24 @@ state 13
     7           | expression MOD . expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 29
+    expression  go to state 30
     primary     go to state 6
 
 
@@ -431,24 +444,25 @@ state 14
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   12           | expression ASSIGN . expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   13           | expression ASSIGN . expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 30
+    expression  go to state 31
     primary     go to state 6
 
 
@@ -462,24 +476,25 @@ state 15
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   13           | expression ADD_ASSIGN . expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   14           | expression ADD_ASSIGN . expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 31
+    expression  go to state 32
     primary     go to state 6
 
 
@@ -493,24 +508,25 @@ state 16
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   14           | expression SUB_ASSIGN . expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   15           | expression SUB_ASSIGN . expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 32
+    expression  go to state 33
     primary     go to state 6
 
 
@@ -524,24 +540,25 @@ state 17
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   15           | expression MUL_ASSIGN . expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   16           | expression MUL_ASSIGN . expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 33
+    expression  go to state 34
     primary     go to state 6
 
 
@@ -555,24 +572,25 @@ state 18
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   16           | expression DIV_ASSIGN . expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   17           | expression DIV_ASSIGN . expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 34
+    expression  go to state 35
     primary     go to state 6
 
 
@@ -586,24 +604,25 @@ state 19
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   17           | expression MOD_ASSIGN . expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   18           | expression MOD_ASSIGN . expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 35
+    expression  go to state 36
     primary     go to state 6
 
 
@@ -618,23 +637,24 @@ state 20
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
     9           | expression BIT_AND . expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 36
+    expression  go to state 37
     primary     go to state 6
 
 
@@ -649,23 +669,24 @@ state 21
     8           | . expression BIT_OR expression
     8           | expression BIT_OR . expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 37
+    expression  go to state 38
     primary     go to state 6
 
 
@@ -679,24 +700,25 @@ state 22
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   11           | . expression LOGIC_AND expression
-   11           | expression LOGIC_AND . expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   12           | expression LOGIC_AND . expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 38
+    expression  go to state 39
     primary     go to state 6
 
 
@@ -710,35 +732,68 @@ state 23
     7           | . expression MOD expression
     8           | . expression BIT_OR expression
     9           | . expression BIT_AND expression
-   10           | . expression LOGIC_OR expression
-   10           | expression LOGIC_OR . expression
-   11           | . expression LOGIC_AND expression
-   12           | . expression ASSIGN expression
-   13           | . expression ADD_ASSIGN expression
-   14           | . expression SUB_ASSIGN expression
-   15           | . expression MUL_ASSIGN expression
-   16           | . expression DIV_ASSIGN expression
-   17           | . expression MOD_ASSIGN expression
-   18           | . LP expression RP
-   19 primary: . INT
-   20        | . DOUBLE
+   10           | . expression EXC_OR expression
+   11           | . expression LOGIC_OR expression
+   11           | expression LOGIC_OR . expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
     LP      shift, and go to state 3
 
-    expression  go to state 39
+    expression  go to state 40
     primary     go to state 6
 
 
 state 24
 
-   18 expression: LP expression RP .
+    2 expression: . primary
+    3           | . expression ADD expression
+    4           | . expression SUB expression
+    5           | . expression MUL expression
+    6           | . expression DIV expression
+    7           | . expression MOD expression
+    8           | . expression BIT_OR expression
+    9           | . expression BIT_AND expression
+   10           | . expression EXC_OR expression
+   10           | expression EXC_OR . expression
+   11           | . expression LOGIC_OR expression
+   12           | . expression LOGIC_AND expression
+   13           | . expression ASSIGN expression
+   14           | . expression ADD_ASSIGN expression
+   15           | . expression SUB_ASSIGN expression
+   16           | . expression MUL_ASSIGN expression
+   17           | . expression DIV_ASSIGN expression
+   18           | . expression MOD_ASSIGN expression
+   19           | . LP expression RP
+   20 primary: . INT
+   21        | . DOUBLE
 
-    $default  reduce using rule 18 (expression)
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+    LP      shift, and go to state 3
+
+    expression  go to state 41
+    primary     go to state 6
 
 
 state 25
+
+   19 expression: LP expression RP .
+
+    $default  reduce using rule 19 (expression)
+
+
+state 26
 
     3 expression: expression . ADD expression  [$end, ADD, SUB, RP]
     3           | expression ADD expression .  [$end, ADD, SUB, RP]
@@ -748,14 +803,15 @@ state 25
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     MUL         shift, and go to state 11
     DIV         shift, and go to state 12
@@ -770,6 +826,7 @@ state 25
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 3 (expression)
 
@@ -788,9 +845,10 @@ state 25
     Conflict between rule 3 and token BIT_OR resolved as shift (ADD < BIT_OR).
     Conflict between rule 3 and token LOGIC_AND resolved as shift (ADD < LOGIC_AND).
     Conflict between rule 3 and token LOGIC_OR resolved as shift (ADD < LOGIC_OR).
+    Conflict between rule 3 and token EXC_OR resolved as shift (ADD < EXC_OR).
 
 
-state 26
+state 27
 
     3 expression: expression . ADD expression
     4           | expression . SUB expression  [$end, ADD, SUB, RP]
@@ -800,14 +858,15 @@ state 26
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     MUL         shift, and go to state 11
     DIV         shift, and go to state 12
@@ -822,6 +881,7 @@ state 26
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 4 (expression)
 
@@ -840,9 +900,10 @@ state 26
     Conflict between rule 4 and token BIT_OR resolved as shift (SUB < BIT_OR).
     Conflict between rule 4 and token LOGIC_AND resolved as shift (SUB < LOGIC_AND).
     Conflict between rule 4 and token LOGIC_OR resolved as shift (SUB < LOGIC_OR).
+    Conflict between rule 4 and token EXC_OR resolved as shift (SUB < EXC_OR).
 
 
-state 27
+state 28
 
     3 expression: expression . ADD expression
     4           | expression . SUB expression
@@ -852,14 +913,15 @@ state 27
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
@@ -871,6 +933,7 @@ state 27
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 5 (expression)
 
@@ -889,9 +952,10 @@ state 27
     Conflict between rule 5 and token BIT_OR resolved as shift (MUL < BIT_OR).
     Conflict between rule 5 and token LOGIC_AND resolved as shift (MUL < LOGIC_AND).
     Conflict between rule 5 and token LOGIC_OR resolved as shift (MUL < LOGIC_OR).
+    Conflict between rule 5 and token EXC_OR resolved as shift (MUL < EXC_OR).
 
 
-state 28
+state 29
 
     3 expression: expression . ADD expression
     4           | expression . SUB expression
@@ -901,14 +965,15 @@ state 28
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
@@ -920,6 +985,7 @@ state 28
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 6 (expression)
 
@@ -938,9 +1004,10 @@ state 28
     Conflict between rule 6 and token BIT_OR resolved as shift (DIV < BIT_OR).
     Conflict between rule 6 and token LOGIC_AND resolved as shift (DIV < LOGIC_AND).
     Conflict between rule 6 and token LOGIC_OR resolved as shift (DIV < LOGIC_OR).
+    Conflict between rule 6 and token EXC_OR resolved as shift (DIV < EXC_OR).
 
 
-state 29
+state 30
 
     3 expression: expression . ADD expression
     4           | expression . SUB expression
@@ -950,14 +1017,15 @@ state 29
     7           | expression MOD expression .  [$end, ADD, SUB, MUL, DIV, MOD, RP]
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
@@ -969,6 +1037,7 @@ state 29
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 7 (expression)
 
@@ -987,51 +1056,7 @@ state 29
     Conflict between rule 7 and token BIT_OR resolved as shift (MOD < BIT_OR).
     Conflict between rule 7 and token LOGIC_AND resolved as shift (MOD < LOGIC_AND).
     Conflict between rule 7 and token LOGIC_OR resolved as shift (MOD < LOGIC_OR).
-
-
-state 30
-
-    3 expression: expression . ADD expression
-    4           | expression . SUB expression
-    5           | expression . MUL expression
-    6           | expression . DIV expression
-    7           | expression . MOD expression
-    8           | expression . BIT_OR expression
-    9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   12           | expression ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
-
-    ASSIGN      shift, and go to state 14
-    ADD_ASSIGN  shift, and go to state 15
-    SUB_ASSIGN  shift, and go to state 16
-    MUL_ASSIGN  shift, and go to state 17
-    DIV_ASSIGN  shift, and go to state 18
-    MOD_ASSIGN  shift, and go to state 19
-
-    $default  reduce using rule 12 (expression)
-
-    Conflict between rule 12 and token ADD resolved as reduce (ADD < ASSIGN).
-    Conflict between rule 12 and token SUB resolved as reduce (SUB < ASSIGN).
-    Conflict between rule 12 and token MUL resolved as reduce (MUL < ASSIGN).
-    Conflict between rule 12 and token DIV resolved as reduce (DIV < ASSIGN).
-    Conflict between rule 12 and token MOD resolved as reduce (MOD < ASSIGN).
-    Conflict between rule 12 and token ASSIGN resolved as shift (%right ASSIGN).
-    Conflict between rule 12 and token ADD_ASSIGN resolved as shift (ASSIGN < ADD_ASSIGN).
-    Conflict between rule 12 and token SUB_ASSIGN resolved as shift (ASSIGN < SUB_ASSIGN).
-    Conflict between rule 12 and token MUL_ASSIGN resolved as shift (ASSIGN < MUL_ASSIGN).
-    Conflict between rule 12 and token DIV_ASSIGN resolved as shift (ASSIGN < DIV_ASSIGN).
-    Conflict between rule 12 and token MOD_ASSIGN resolved as shift (ASSIGN < MOD_ASSIGN).
-    Conflict between rule 12 and token BIT_AND resolved as reduce (BIT_AND < ASSIGN).
-    Conflict between rule 12 and token BIT_OR resolved as reduce (BIT_OR < ASSIGN).
-    Conflict between rule 12 and token LOGIC_AND resolved as reduce (LOGIC_AND < ASSIGN).
-    Conflict between rule 12 and token LOGIC_OR resolved as reduce (LOGIC_OR < ASSIGN).
+    Conflict between rule 7 and token EXC_OR resolved as shift (MOD < EXC_OR).
 
 
 state 31
@@ -1043,16 +1068,18 @@ state 31
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   13           | expression ADD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   13           | expression ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
+    ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
     SUB_ASSIGN  shift, and go to state 16
     MUL_ASSIGN  shift, and go to state 17
@@ -1061,21 +1088,22 @@ state 31
 
     $default  reduce using rule 13 (expression)
 
-    Conflict between rule 13 and token ADD resolved as reduce (ADD < ADD_ASSIGN).
-    Conflict between rule 13 and token SUB resolved as reduce (SUB < ADD_ASSIGN).
-    Conflict between rule 13 and token MUL resolved as reduce (MUL < ADD_ASSIGN).
-    Conflict between rule 13 and token DIV resolved as reduce (DIV < ADD_ASSIGN).
-    Conflict between rule 13 and token MOD resolved as reduce (MOD < ADD_ASSIGN).
-    Conflict between rule 13 and token ASSIGN resolved as reduce (ASSIGN < ADD_ASSIGN).
-    Conflict between rule 13 and token ADD_ASSIGN resolved as shift (%right ADD_ASSIGN).
-    Conflict between rule 13 and token SUB_ASSIGN resolved as shift (%right SUB_ASSIGN).
-    Conflict between rule 13 and token MUL_ASSIGN resolved as shift (%right MUL_ASSIGN).
-    Conflict between rule 13 and token DIV_ASSIGN resolved as shift (%right DIV_ASSIGN).
-    Conflict between rule 13 and token MOD_ASSIGN resolved as shift (%right MOD_ASSIGN).
-    Conflict between rule 13 and token BIT_AND resolved as reduce (BIT_AND < ADD_ASSIGN).
-    Conflict between rule 13 and token BIT_OR resolved as reduce (BIT_OR < ADD_ASSIGN).
-    Conflict between rule 13 and token LOGIC_AND resolved as reduce (LOGIC_AND < ADD_ASSIGN).
-    Conflict between rule 13 and token LOGIC_OR resolved as reduce (LOGIC_OR < ADD_ASSIGN).
+    Conflict between rule 13 and token ADD resolved as reduce (ADD < ASSIGN).
+    Conflict between rule 13 and token SUB resolved as reduce (SUB < ASSIGN).
+    Conflict between rule 13 and token MUL resolved as reduce (MUL < ASSIGN).
+    Conflict between rule 13 and token DIV resolved as reduce (DIV < ASSIGN).
+    Conflict between rule 13 and token MOD resolved as reduce (MOD < ASSIGN).
+    Conflict between rule 13 and token ASSIGN resolved as shift (%right ASSIGN).
+    Conflict between rule 13 and token ADD_ASSIGN resolved as shift (ASSIGN < ADD_ASSIGN).
+    Conflict between rule 13 and token SUB_ASSIGN resolved as shift (ASSIGN < SUB_ASSIGN).
+    Conflict between rule 13 and token MUL_ASSIGN resolved as shift (ASSIGN < MUL_ASSIGN).
+    Conflict between rule 13 and token DIV_ASSIGN resolved as shift (ASSIGN < DIV_ASSIGN).
+    Conflict between rule 13 and token MOD_ASSIGN resolved as shift (ASSIGN < MOD_ASSIGN).
+    Conflict between rule 13 and token BIT_AND resolved as reduce (BIT_AND < ASSIGN).
+    Conflict between rule 13 and token BIT_OR resolved as reduce (BIT_OR < ASSIGN).
+    Conflict between rule 13 and token LOGIC_AND resolved as reduce (LOGIC_AND < ASSIGN).
+    Conflict between rule 13 and token LOGIC_OR resolved as reduce (LOGIC_OR < ASSIGN).
+    Conflict between rule 13 and token EXC_OR resolved as reduce (EXC_OR < ASSIGN).
 
 
 state 32
@@ -1087,15 +1115,16 @@ state 32
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   14           | expression SUB_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   14           | expression ADD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ADD_ASSIGN  shift, and go to state 15
     SUB_ASSIGN  shift, and go to state 16
@@ -1105,21 +1134,22 @@ state 32
 
     $default  reduce using rule 14 (expression)
 
-    Conflict between rule 14 and token ADD resolved as reduce (ADD < SUB_ASSIGN).
-    Conflict between rule 14 and token SUB resolved as reduce (SUB < SUB_ASSIGN).
-    Conflict between rule 14 and token MUL resolved as reduce (MUL < SUB_ASSIGN).
-    Conflict between rule 14 and token DIV resolved as reduce (DIV < SUB_ASSIGN).
-    Conflict between rule 14 and token MOD resolved as reduce (MOD < SUB_ASSIGN).
-    Conflict between rule 14 and token ASSIGN resolved as reduce (ASSIGN < SUB_ASSIGN).
+    Conflict between rule 14 and token ADD resolved as reduce (ADD < ADD_ASSIGN).
+    Conflict between rule 14 and token SUB resolved as reduce (SUB < ADD_ASSIGN).
+    Conflict between rule 14 and token MUL resolved as reduce (MUL < ADD_ASSIGN).
+    Conflict between rule 14 and token DIV resolved as reduce (DIV < ADD_ASSIGN).
+    Conflict between rule 14 and token MOD resolved as reduce (MOD < ADD_ASSIGN).
+    Conflict between rule 14 and token ASSIGN resolved as reduce (ASSIGN < ADD_ASSIGN).
     Conflict between rule 14 and token ADD_ASSIGN resolved as shift (%right ADD_ASSIGN).
     Conflict between rule 14 and token SUB_ASSIGN resolved as shift (%right SUB_ASSIGN).
     Conflict between rule 14 and token MUL_ASSIGN resolved as shift (%right MUL_ASSIGN).
     Conflict between rule 14 and token DIV_ASSIGN resolved as shift (%right DIV_ASSIGN).
     Conflict between rule 14 and token MOD_ASSIGN resolved as shift (%right MOD_ASSIGN).
-    Conflict between rule 14 and token BIT_AND resolved as reduce (BIT_AND < SUB_ASSIGN).
-    Conflict between rule 14 and token BIT_OR resolved as reduce (BIT_OR < SUB_ASSIGN).
-    Conflict between rule 14 and token LOGIC_AND resolved as reduce (LOGIC_AND < SUB_ASSIGN).
-    Conflict between rule 14 and token LOGIC_OR resolved as reduce (LOGIC_OR < SUB_ASSIGN).
+    Conflict between rule 14 and token BIT_AND resolved as reduce (BIT_AND < ADD_ASSIGN).
+    Conflict between rule 14 and token BIT_OR resolved as reduce (BIT_OR < ADD_ASSIGN).
+    Conflict between rule 14 and token LOGIC_AND resolved as reduce (LOGIC_AND < ADD_ASSIGN).
+    Conflict between rule 14 and token LOGIC_OR resolved as reduce (LOGIC_OR < ADD_ASSIGN).
+    Conflict between rule 14 and token EXC_OR resolved as reduce (EXC_OR < ADD_ASSIGN).
 
 
 state 33
@@ -1131,15 +1161,16 @@ state 33
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   15           | expression MUL_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   15           | expression SUB_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ADD_ASSIGN  shift, and go to state 15
     SUB_ASSIGN  shift, and go to state 16
@@ -1149,21 +1180,22 @@ state 33
 
     $default  reduce using rule 15 (expression)
 
-    Conflict between rule 15 and token ADD resolved as reduce (ADD < MUL_ASSIGN).
-    Conflict between rule 15 and token SUB resolved as reduce (SUB < MUL_ASSIGN).
-    Conflict between rule 15 and token MUL resolved as reduce (MUL < MUL_ASSIGN).
-    Conflict between rule 15 and token DIV resolved as reduce (DIV < MUL_ASSIGN).
-    Conflict between rule 15 and token MOD resolved as reduce (MOD < MUL_ASSIGN).
-    Conflict between rule 15 and token ASSIGN resolved as reduce (ASSIGN < MUL_ASSIGN).
+    Conflict between rule 15 and token ADD resolved as reduce (ADD < SUB_ASSIGN).
+    Conflict between rule 15 and token SUB resolved as reduce (SUB < SUB_ASSIGN).
+    Conflict between rule 15 and token MUL resolved as reduce (MUL < SUB_ASSIGN).
+    Conflict between rule 15 and token DIV resolved as reduce (DIV < SUB_ASSIGN).
+    Conflict between rule 15 and token MOD resolved as reduce (MOD < SUB_ASSIGN).
+    Conflict between rule 15 and token ASSIGN resolved as reduce (ASSIGN < SUB_ASSIGN).
     Conflict between rule 15 and token ADD_ASSIGN resolved as shift (%right ADD_ASSIGN).
     Conflict between rule 15 and token SUB_ASSIGN resolved as shift (%right SUB_ASSIGN).
     Conflict between rule 15 and token MUL_ASSIGN resolved as shift (%right MUL_ASSIGN).
     Conflict between rule 15 and token DIV_ASSIGN resolved as shift (%right DIV_ASSIGN).
     Conflict between rule 15 and token MOD_ASSIGN resolved as shift (%right MOD_ASSIGN).
-    Conflict between rule 15 and token BIT_AND resolved as reduce (BIT_AND < MUL_ASSIGN).
-    Conflict between rule 15 and token BIT_OR resolved as reduce (BIT_OR < MUL_ASSIGN).
-    Conflict between rule 15 and token LOGIC_AND resolved as reduce (LOGIC_AND < MUL_ASSIGN).
-    Conflict between rule 15 and token LOGIC_OR resolved as reduce (LOGIC_OR < MUL_ASSIGN).
+    Conflict between rule 15 and token BIT_AND resolved as reduce (BIT_AND < SUB_ASSIGN).
+    Conflict between rule 15 and token BIT_OR resolved as reduce (BIT_OR < SUB_ASSIGN).
+    Conflict between rule 15 and token LOGIC_AND resolved as reduce (LOGIC_AND < SUB_ASSIGN).
+    Conflict between rule 15 and token LOGIC_OR resolved as reduce (LOGIC_OR < SUB_ASSIGN).
+    Conflict between rule 15 and token EXC_OR resolved as reduce (EXC_OR < SUB_ASSIGN).
 
 
 state 34
@@ -1175,15 +1207,16 @@ state 34
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   16           | expression DIV_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   16           | expression MUL_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ADD_ASSIGN  shift, and go to state 15
     SUB_ASSIGN  shift, and go to state 16
@@ -1193,21 +1226,22 @@ state 34
 
     $default  reduce using rule 16 (expression)
 
-    Conflict between rule 16 and token ADD resolved as reduce (ADD < DIV_ASSIGN).
-    Conflict between rule 16 and token SUB resolved as reduce (SUB < DIV_ASSIGN).
-    Conflict between rule 16 and token MUL resolved as reduce (MUL < DIV_ASSIGN).
-    Conflict between rule 16 and token DIV resolved as reduce (DIV < DIV_ASSIGN).
-    Conflict between rule 16 and token MOD resolved as reduce (MOD < DIV_ASSIGN).
-    Conflict between rule 16 and token ASSIGN resolved as reduce (ASSIGN < DIV_ASSIGN).
+    Conflict between rule 16 and token ADD resolved as reduce (ADD < MUL_ASSIGN).
+    Conflict between rule 16 and token SUB resolved as reduce (SUB < MUL_ASSIGN).
+    Conflict between rule 16 and token MUL resolved as reduce (MUL < MUL_ASSIGN).
+    Conflict between rule 16 and token DIV resolved as reduce (DIV < MUL_ASSIGN).
+    Conflict between rule 16 and token MOD resolved as reduce (MOD < MUL_ASSIGN).
+    Conflict between rule 16 and token ASSIGN resolved as reduce (ASSIGN < MUL_ASSIGN).
     Conflict between rule 16 and token ADD_ASSIGN resolved as shift (%right ADD_ASSIGN).
     Conflict between rule 16 and token SUB_ASSIGN resolved as shift (%right SUB_ASSIGN).
     Conflict between rule 16 and token MUL_ASSIGN resolved as shift (%right MUL_ASSIGN).
     Conflict between rule 16 and token DIV_ASSIGN resolved as shift (%right DIV_ASSIGN).
     Conflict between rule 16 and token MOD_ASSIGN resolved as shift (%right MOD_ASSIGN).
-    Conflict between rule 16 and token BIT_AND resolved as reduce (BIT_AND < DIV_ASSIGN).
-    Conflict between rule 16 and token BIT_OR resolved as reduce (BIT_OR < DIV_ASSIGN).
-    Conflict between rule 16 and token LOGIC_AND resolved as reduce (LOGIC_AND < DIV_ASSIGN).
-    Conflict between rule 16 and token LOGIC_OR resolved as reduce (LOGIC_OR < DIV_ASSIGN).
+    Conflict between rule 16 and token BIT_AND resolved as reduce (BIT_AND < MUL_ASSIGN).
+    Conflict between rule 16 and token BIT_OR resolved as reduce (BIT_OR < MUL_ASSIGN).
+    Conflict between rule 16 and token LOGIC_AND resolved as reduce (LOGIC_AND < MUL_ASSIGN).
+    Conflict between rule 16 and token LOGIC_OR resolved as reduce (LOGIC_OR < MUL_ASSIGN).
+    Conflict between rule 16 and token EXC_OR resolved as reduce (EXC_OR < MUL_ASSIGN).
 
 
 state 35
@@ -1219,15 +1253,16 @@ state 35
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   17           | expression MOD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   17           | expression DIV_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   18           | expression . MOD_ASSIGN expression
 
     ADD_ASSIGN  shift, and go to state 15
     SUB_ASSIGN  shift, and go to state 16
@@ -1237,21 +1272,22 @@ state 35
 
     $default  reduce using rule 17 (expression)
 
-    Conflict between rule 17 and token ADD resolved as reduce (ADD < MOD_ASSIGN).
-    Conflict between rule 17 and token SUB resolved as reduce (SUB < MOD_ASSIGN).
-    Conflict between rule 17 and token MUL resolved as reduce (MUL < MOD_ASSIGN).
-    Conflict between rule 17 and token DIV resolved as reduce (DIV < MOD_ASSIGN).
-    Conflict between rule 17 and token MOD resolved as reduce (MOD < MOD_ASSIGN).
-    Conflict between rule 17 and token ASSIGN resolved as reduce (ASSIGN < MOD_ASSIGN).
+    Conflict between rule 17 and token ADD resolved as reduce (ADD < DIV_ASSIGN).
+    Conflict between rule 17 and token SUB resolved as reduce (SUB < DIV_ASSIGN).
+    Conflict between rule 17 and token MUL resolved as reduce (MUL < DIV_ASSIGN).
+    Conflict between rule 17 and token DIV resolved as reduce (DIV < DIV_ASSIGN).
+    Conflict between rule 17 and token MOD resolved as reduce (MOD < DIV_ASSIGN).
+    Conflict between rule 17 and token ASSIGN resolved as reduce (ASSIGN < DIV_ASSIGN).
     Conflict between rule 17 and token ADD_ASSIGN resolved as shift (%right ADD_ASSIGN).
     Conflict between rule 17 and token SUB_ASSIGN resolved as shift (%right SUB_ASSIGN).
     Conflict between rule 17 and token MUL_ASSIGN resolved as shift (%right MUL_ASSIGN).
     Conflict between rule 17 and token DIV_ASSIGN resolved as shift (%right DIV_ASSIGN).
     Conflict between rule 17 and token MOD_ASSIGN resolved as shift (%right MOD_ASSIGN).
-    Conflict between rule 17 and token BIT_AND resolved as reduce (BIT_AND < MOD_ASSIGN).
-    Conflict between rule 17 and token BIT_OR resolved as reduce (BIT_OR < MOD_ASSIGN).
-    Conflict between rule 17 and token LOGIC_AND resolved as reduce (LOGIC_AND < MOD_ASSIGN).
-    Conflict between rule 17 and token LOGIC_OR resolved as reduce (LOGIC_OR < MOD_ASSIGN).
+    Conflict between rule 17 and token BIT_AND resolved as reduce (BIT_AND < DIV_ASSIGN).
+    Conflict between rule 17 and token BIT_OR resolved as reduce (BIT_OR < DIV_ASSIGN).
+    Conflict between rule 17 and token LOGIC_AND resolved as reduce (LOGIC_AND < DIV_ASSIGN).
+    Conflict between rule 17 and token LOGIC_OR resolved as reduce (LOGIC_OR < DIV_ASSIGN).
+    Conflict between rule 17 and token EXC_OR resolved as reduce (EXC_OR < DIV_ASSIGN).
 
 
 state 36
@@ -1262,16 +1298,63 @@ state 36
     6           | expression . DIV expression
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
+    9           | expression . BIT_AND expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   18           | expression MOD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+
+    ADD_ASSIGN  shift, and go to state 15
+    SUB_ASSIGN  shift, and go to state 16
+    MUL_ASSIGN  shift, and go to state 17
+    DIV_ASSIGN  shift, and go to state 18
+    MOD_ASSIGN  shift, and go to state 19
+
+    $default  reduce using rule 18 (expression)
+
+    Conflict between rule 18 and token ADD resolved as reduce (ADD < MOD_ASSIGN).
+    Conflict between rule 18 and token SUB resolved as reduce (SUB < MOD_ASSIGN).
+    Conflict between rule 18 and token MUL resolved as reduce (MUL < MOD_ASSIGN).
+    Conflict between rule 18 and token DIV resolved as reduce (DIV < MOD_ASSIGN).
+    Conflict between rule 18 and token MOD resolved as reduce (MOD < MOD_ASSIGN).
+    Conflict between rule 18 and token ASSIGN resolved as reduce (ASSIGN < MOD_ASSIGN).
+    Conflict between rule 18 and token ADD_ASSIGN resolved as shift (%right ADD_ASSIGN).
+    Conflict between rule 18 and token SUB_ASSIGN resolved as shift (%right SUB_ASSIGN).
+    Conflict between rule 18 and token MUL_ASSIGN resolved as shift (%right MUL_ASSIGN).
+    Conflict between rule 18 and token DIV_ASSIGN resolved as shift (%right DIV_ASSIGN).
+    Conflict between rule 18 and token MOD_ASSIGN resolved as shift (%right MOD_ASSIGN).
+    Conflict between rule 18 and token BIT_AND resolved as reduce (BIT_AND < MOD_ASSIGN).
+    Conflict between rule 18 and token BIT_OR resolved as reduce (BIT_OR < MOD_ASSIGN).
+    Conflict between rule 18 and token LOGIC_AND resolved as reduce (LOGIC_AND < MOD_ASSIGN).
+    Conflict between rule 18 and token LOGIC_OR resolved as reduce (LOGIC_OR < MOD_ASSIGN).
+    Conflict between rule 18 and token EXC_OR resolved as reduce (EXC_OR < MOD_ASSIGN).
+
+
+state 37
+
+    3 expression: expression . ADD expression
+    4           | expression . SUB expression
+    5           | expression . MUL expression
+    6           | expression . DIV expression
+    7           | expression . MOD expression
+    8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, RP]
     9           | expression BIT_AND expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, RP]
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
@@ -1282,6 +1365,7 @@ state 36
     BIT_OR      shift, and go to state 21
     LOGIC_AND   shift, and go to state 22
     LOGIC_OR    shift, and go to state 23
+    EXC_OR      shift, and go to state 24
 
     $default  reduce using rule 9 (expression)
 
@@ -1300,26 +1384,28 @@ state 36
     Conflict between rule 9 and token BIT_OR resolved as shift (BIT_AND < BIT_OR).
     Conflict between rule 9 and token LOGIC_AND resolved as shift (BIT_AND < LOGIC_AND).
     Conflict between rule 9 and token LOGIC_OR resolved as shift (BIT_AND < LOGIC_OR).
+    Conflict between rule 9 and token EXC_OR resolved as shift (BIT_AND < EXC_OR).
 
 
-state 37
+state 38
 
     3 expression: expression . ADD expression
     4           | expression . SUB expression
     5           | expression . MUL expression
     6           | expression . DIV expression
     7           | expression . MOD expression
-    8           | expression . BIT_OR expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, RP]
-    8           | expression BIT_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, RP]
+    8           | expression . BIT_OR expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, RP, EXC_OR]
+    8           | expression BIT_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, RP, EXC_OR]
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
@@ -1347,52 +1433,7 @@ state 37
     Conflict between rule 8 and token BIT_OR resolved as reduce (%left BIT_OR).
     Conflict between rule 8 and token LOGIC_AND resolved as shift (BIT_OR < LOGIC_AND).
     Conflict between rule 8 and token LOGIC_OR resolved as shift (BIT_OR < LOGIC_OR).
-
-
-state 38
-
-    3 expression: expression . ADD expression
-    4           | expression . SUB expression
-    5           | expression . MUL expression
-    6           | expression . DIV expression
-    7           | expression . MOD expression
-    8           | expression . BIT_OR expression
-    9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression
-   11           | expression . LOGIC_AND expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, RP]
-   11           | expression LOGIC_AND expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, RP]
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
-
-    ASSIGN      shift, and go to state 14
-    ADD_ASSIGN  shift, and go to state 15
-    SUB_ASSIGN  shift, and go to state 16
-    MUL_ASSIGN  shift, and go to state 17
-    DIV_ASSIGN  shift, and go to state 18
-    MOD_ASSIGN  shift, and go to state 19
-    LOGIC_OR    shift, and go to state 23
-
-    $default  reduce using rule 11 (expression)
-
-    Conflict between rule 11 and token ADD resolved as reduce (ADD < LOGIC_AND).
-    Conflict between rule 11 and token SUB resolved as reduce (SUB < LOGIC_AND).
-    Conflict between rule 11 and token MUL resolved as reduce (MUL < LOGIC_AND).
-    Conflict between rule 11 and token DIV resolved as reduce (DIV < LOGIC_AND).
-    Conflict between rule 11 and token MOD resolved as reduce (MOD < LOGIC_AND).
-    Conflict between rule 11 and token ASSIGN resolved as shift (LOGIC_AND < ASSIGN).
-    Conflict between rule 11 and token ADD_ASSIGN resolved as shift (LOGIC_AND < ADD_ASSIGN).
-    Conflict between rule 11 and token SUB_ASSIGN resolved as shift (LOGIC_AND < SUB_ASSIGN).
-    Conflict between rule 11 and token MUL_ASSIGN resolved as shift (LOGIC_AND < MUL_ASSIGN).
-    Conflict between rule 11 and token DIV_ASSIGN resolved as shift (LOGIC_AND < DIV_ASSIGN).
-    Conflict between rule 11 and token MOD_ASSIGN resolved as shift (LOGIC_AND < MOD_ASSIGN).
-    Conflict between rule 11 and token BIT_AND resolved as reduce (BIT_AND < LOGIC_AND).
-    Conflict between rule 11 and token BIT_OR resolved as reduce (BIT_OR < LOGIC_AND).
-    Conflict between rule 11 and token LOGIC_AND resolved as reduce (%left LOGIC_AND).
-    Conflict between rule 11 and token LOGIC_OR resolved as shift (LOGIC_AND < LOGIC_OR).
+    Conflict between rule 8 and token EXC_OR resolved as reduce (EXC_OR < BIT_OR).
 
 
 state 39
@@ -1404,15 +1445,64 @@ state 39
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
-   10           | expression . LOGIC_OR expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   10           | expression LOGIC_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-   11           | expression . LOGIC_AND expression
-   12           | expression . ASSIGN expression
-   13           | expression . ADD_ASSIGN expression
-   14           | expression . SUB_ASSIGN expression
-   15           | expression . MUL_ASSIGN expression
-   16           | expression . DIV_ASSIGN expression
-   17           | expression . MOD_ASSIGN expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, RP, EXC_OR]
+   12           | expression LOGIC_AND expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, RP, EXC_OR]
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
+
+    ASSIGN      shift, and go to state 14
+    ADD_ASSIGN  shift, and go to state 15
+    SUB_ASSIGN  shift, and go to state 16
+    MUL_ASSIGN  shift, and go to state 17
+    DIV_ASSIGN  shift, and go to state 18
+    MOD_ASSIGN  shift, and go to state 19
+    LOGIC_OR    shift, and go to state 23
+
+    $default  reduce using rule 12 (expression)
+
+    Conflict between rule 12 and token ADD resolved as reduce (ADD < LOGIC_AND).
+    Conflict between rule 12 and token SUB resolved as reduce (SUB < LOGIC_AND).
+    Conflict between rule 12 and token MUL resolved as reduce (MUL < LOGIC_AND).
+    Conflict between rule 12 and token DIV resolved as reduce (DIV < LOGIC_AND).
+    Conflict between rule 12 and token MOD resolved as reduce (MOD < LOGIC_AND).
+    Conflict between rule 12 and token ASSIGN resolved as shift (LOGIC_AND < ASSIGN).
+    Conflict between rule 12 and token ADD_ASSIGN resolved as shift (LOGIC_AND < ADD_ASSIGN).
+    Conflict between rule 12 and token SUB_ASSIGN resolved as shift (LOGIC_AND < SUB_ASSIGN).
+    Conflict between rule 12 and token MUL_ASSIGN resolved as shift (LOGIC_AND < MUL_ASSIGN).
+    Conflict between rule 12 and token DIV_ASSIGN resolved as shift (LOGIC_AND < DIV_ASSIGN).
+    Conflict between rule 12 and token MOD_ASSIGN resolved as shift (LOGIC_AND < MOD_ASSIGN).
+    Conflict between rule 12 and token BIT_AND resolved as reduce (BIT_AND < LOGIC_AND).
+    Conflict between rule 12 and token BIT_OR resolved as reduce (BIT_OR < LOGIC_AND).
+    Conflict between rule 12 and token LOGIC_AND resolved as reduce (%left LOGIC_AND).
+    Conflict between rule 12 and token LOGIC_OR resolved as shift (LOGIC_AND < LOGIC_OR).
+    Conflict between rule 12 and token EXC_OR resolved as reduce (EXC_OR < LOGIC_AND).
+
+
+state 40
+
+    3 expression: expression . ADD expression
+    4           | expression . SUB expression
+    5           | expression . MUL expression
+    6           | expression . DIV expression
+    7           | expression . MOD expression
+    8           | expression . BIT_OR expression
+    9           | expression . BIT_AND expression
+   10           | expression . EXC_OR expression
+   11           | expression . LOGIC_OR expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   11           | expression LOGIC_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
 
     ASSIGN      shift, and go to state 14
     ADD_ASSIGN  shift, and go to state 15
@@ -1421,20 +1511,71 @@ state 39
     DIV_ASSIGN  shift, and go to state 18
     MOD_ASSIGN  shift, and go to state 19
 
+    $default  reduce using rule 11 (expression)
+
+    Conflict between rule 11 and token ADD resolved as reduce (ADD < LOGIC_OR).
+    Conflict between rule 11 and token SUB resolved as reduce (SUB < LOGIC_OR).
+    Conflict between rule 11 and token MUL resolved as reduce (MUL < LOGIC_OR).
+    Conflict between rule 11 and token DIV resolved as reduce (DIV < LOGIC_OR).
+    Conflict between rule 11 and token MOD resolved as reduce (MOD < LOGIC_OR).
+    Conflict between rule 11 and token ASSIGN resolved as shift (LOGIC_OR < ASSIGN).
+    Conflict between rule 11 and token ADD_ASSIGN resolved as shift (LOGIC_OR < ADD_ASSIGN).
+    Conflict between rule 11 and token SUB_ASSIGN resolved as shift (LOGIC_OR < SUB_ASSIGN).
+    Conflict between rule 11 and token MUL_ASSIGN resolved as shift (LOGIC_OR < MUL_ASSIGN).
+    Conflict between rule 11 and token DIV_ASSIGN resolved as shift (LOGIC_OR < DIV_ASSIGN).
+    Conflict between rule 11 and token MOD_ASSIGN resolved as shift (LOGIC_OR < MOD_ASSIGN).
+    Conflict between rule 11 and token BIT_AND resolved as reduce (BIT_AND < LOGIC_OR).
+    Conflict between rule 11 and token BIT_OR resolved as reduce (BIT_OR < LOGIC_OR).
+    Conflict between rule 11 and token LOGIC_AND resolved as reduce (LOGIC_AND < LOGIC_OR).
+    Conflict between rule 11 and token LOGIC_OR resolved as reduce (%left LOGIC_OR).
+    Conflict between rule 11 and token EXC_OR resolved as reduce (EXC_OR < LOGIC_OR).
+
+
+state 41
+
+    3 expression: expression . ADD expression
+    4           | expression . SUB expression
+    5           | expression . MUL expression
+    6           | expression . DIV expression
+    7           | expression . MOD expression
+    8           | expression . BIT_OR expression
+    9           | expression . BIT_AND expression
+   10           | expression . EXC_OR expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, RP, EXC_OR]
+   10           | expression EXC_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, RP, EXC_OR]
+   11           | expression . LOGIC_OR expression
+   12           | expression . LOGIC_AND expression
+   13           | expression . ASSIGN expression
+   14           | expression . ADD_ASSIGN expression
+   15           | expression . SUB_ASSIGN expression
+   16           | expression . MUL_ASSIGN expression
+   17           | expression . DIV_ASSIGN expression
+   18           | expression . MOD_ASSIGN expression
+
+    ASSIGN      shift, and go to state 14
+    ADD_ASSIGN  shift, and go to state 15
+    SUB_ASSIGN  shift, and go to state 16
+    MUL_ASSIGN  shift, and go to state 17
+    DIV_ASSIGN  shift, and go to state 18
+    MOD_ASSIGN  shift, and go to state 19
+    BIT_OR      shift, and go to state 21
+    LOGIC_AND   shift, and go to state 22
+    LOGIC_OR    shift, and go to state 23
+
     $default  reduce using rule 10 (expression)
 
-    Conflict between rule 10 and token ADD resolved as reduce (ADD < LOGIC_OR).
-    Conflict between rule 10 and token SUB resolved as reduce (SUB < LOGIC_OR).
-    Conflict between rule 10 and token MUL resolved as reduce (MUL < LOGIC_OR).
-    Conflict between rule 10 and token DIV resolved as reduce (DIV < LOGIC_OR).
-    Conflict between rule 10 and token MOD resolved as reduce (MOD < LOGIC_OR).
-    Conflict between rule 10 and token ASSIGN resolved as shift (LOGIC_OR < ASSIGN).
-    Conflict between rule 10 and token ADD_ASSIGN resolved as shift (LOGIC_OR < ADD_ASSIGN).
-    Conflict between rule 10 and token SUB_ASSIGN resolved as shift (LOGIC_OR < SUB_ASSIGN).
-    Conflict between rule 10 and token MUL_ASSIGN resolved as shift (LOGIC_OR < MUL_ASSIGN).
-    Conflict between rule 10 and token DIV_ASSIGN resolved as shift (LOGIC_OR < DIV_ASSIGN).
-    Conflict between rule 10 and token MOD_ASSIGN resolved as shift (LOGIC_OR < MOD_ASSIGN).
-    Conflict between rule 10 and token BIT_AND resolved as reduce (BIT_AND < LOGIC_OR).
-    Conflict between rule 10 and token BIT_OR resolved as reduce (BIT_OR < LOGIC_OR).
-    Conflict between rule 10 and token LOGIC_AND resolved as reduce (LOGIC_AND < LOGIC_OR).
-    Conflict between rule 10 and token LOGIC_OR resolved as reduce (%left LOGIC_OR).
+    Conflict between rule 10 and token ADD resolved as reduce (ADD < EXC_OR).
+    Conflict between rule 10 and token SUB resolved as reduce (SUB < EXC_OR).
+    Conflict between rule 10 and token MUL resolved as reduce (MUL < EXC_OR).
+    Conflict between rule 10 and token DIV resolved as reduce (DIV < EXC_OR).
+    Conflict between rule 10 and token MOD resolved as reduce (MOD < EXC_OR).
+    Conflict between rule 10 and token ASSIGN resolved as shift (EXC_OR < ASSIGN).
+    Conflict between rule 10 and token ADD_ASSIGN resolved as shift (EXC_OR < ADD_ASSIGN).
+    Conflict between rule 10 and token SUB_ASSIGN resolved as shift (EXC_OR < SUB_ASSIGN).
+    Conflict between rule 10 and token MUL_ASSIGN resolved as shift (EXC_OR < MUL_ASSIGN).
+    Conflict between rule 10 and token DIV_ASSIGN resolved as shift (EXC_OR < DIV_ASSIGN).
+    Conflict between rule 10 and token MOD_ASSIGN resolved as shift (EXC_OR < MOD_ASSIGN).
+    Conflict between rule 10 and token BIT_AND resolved as reduce (BIT_AND < EXC_OR).
+    Conflict between rule 10 and token BIT_OR resolved as shift (EXC_OR < BIT_OR).
+    Conflict between rule 10 and token LOGIC_AND resolved as shift (EXC_OR < LOGIC_AND).
+    Conflict between rule 10 and token LOGIC_OR resolved as shift (EXC_OR < LOGIC_OR).
+    Conflict between rule 10 and token EXC_OR resolved as reduce (%left EXC_OR).
