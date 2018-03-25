@@ -8,6 +8,9 @@ typedef enum ast_tag {
 	ast_double,
 	ast_ident,
 
+	ast_pos,
+	ast_neg,
+
 	ast_add,
 	ast_sub,
 	ast_mul,
@@ -52,6 +55,8 @@ ast* ast_new(ast_tag tag);
 ast* ast_new_int(int ivalue);
 
 ast* ast_new_double(double dvalue);
+
+ast* ast_new_unary(ast_tag tag, ast* a);
 
 ast* ast_new_binary(ast_tag tag, ast* left, ast* right);
 

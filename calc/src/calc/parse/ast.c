@@ -25,6 +25,12 @@ ast* ast_new_double(double dvalue) {
 	return ret;
 }
 
+ast* ast_new_unary(ast_tag tag, ast* a) {
+	ast* ret = ast_new(tag);
+	ast_push(ret, a);
+	return ret;
+}
+
 ast* ast_new_binary(ast_tag tag, ast* left, ast* right) {
 	ast* ret = ast_new(tag);
 	ast_push(ret, left);
@@ -52,7 +58,9 @@ void ast_print(ast* self) {
 			printf("%lf", self->u.dvalue);
 			break;
 		case ast_add: p("+");
+		case ast_pos: p("+");
 		case ast_sub: p("-");
+		case ast_neg: p("-");
 		case ast_mul: p("*");
 		case ast_div: p("/");
 		case ast_mod: p("%%");
@@ -108,7 +116,9 @@ double ast_eval(ast* self) {
 	}
 	switch(self->tag) {
 		case ast_add: return (ast_eval(ast_first(self)) + ast_eval(ast_second(self)));
+		case ast_pos: return +(ast_eval(ast_first(self)));
 		case ast_sub: return (ast_eval(ast_first(self)) - ast_eval(ast_second(self)));
+		case ast_neg: return -(ast_eval(ast_first(self)));
 		case ast_mul: return (ast_eval(ast_first(self)) * ast_eval(ast_second(self)));
 		case ast_div: return (ast_eval(ast_first(self)) / ast_eval(ast_second(self)));
 		case ast_mod: return ((int)ast_eval(ast_first(self)) % (int)ast_eval(ast_second(self)));

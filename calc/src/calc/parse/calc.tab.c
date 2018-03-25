@@ -1508,14 +1508,14 @@ yyreduce:
   case 4:
 #line 46 "calc.y"
     {
-		(yyval.ast_value) = (yyvsp[(2) - (2)].ast_value);
+		(yyval.ast_value) = ast_new_unary(ast_pos, (yyvsp[(2) - (2)].ast_value));
 	;}
     break;
 
   case 5:
 #line 50 "calc.y"
     {
-		(yyval.ast_value) = (yyvsp[(2) - (2)].ast_value);
+		(yyval.ast_value) = ast_new_unary(ast_neg, (yyvsp[(2) - (2)].ast_value));
 	;}
     break;
 

@@ -44,11 +44,11 @@ expression
 	: primary
 	| ADD expression %prec POSITIVE
 	{
-		$$ = $2;
+		$$ = ast_new_unary(ast_pos, $2);
 	}
 	| SUB expression %prec NEGATIVE
 	{
-		$$ = $2;
+		$$ = ast_new_unary(ast_neg, $2);
 	}
 	| expression ADD expression
 	{
