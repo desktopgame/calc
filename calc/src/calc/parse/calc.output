@@ -82,9 +82,9 @@ LP (286) 28
 RP (287) 28
 EXC_OR (288) 14
 IDENT (289)
-CHILDA (290) 27
-POSITIVE (291)
-NEGATIVE (292)
+POSITIVE (290)
+NEGATIVE (291)
+CHILDA (292) 27
 
 
 Nonterminals, with rules where they appear
@@ -596,14 +596,7 @@ state 13
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
-   27           | CHILDA expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-
-    ASSIGN      shift, and go to state 20
-    ADD_ASSIGN  shift, and go to state 21
-    SUB_ASSIGN  shift, and go to state 22
-    MUL_ASSIGN  shift, and go to state 23
-    DIV_ASSIGN  shift, and go to state 24
-    MOD_ASSIGN  shift, and go to state 25
+   27           | CHILDA expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
 
     $default  reduce using rule 27 (expression)
 
@@ -612,12 +605,12 @@ state 13
     Conflict between rule 27 and token MUL resolved as reduce (MUL < CHILDA).
     Conflict between rule 27 and token DIV resolved as reduce (DIV < CHILDA).
     Conflict between rule 27 and token MOD resolved as reduce (MOD < CHILDA).
-    Conflict between rule 27 and token ASSIGN resolved as shift (CHILDA < ASSIGN).
-    Conflict between rule 27 and token ADD_ASSIGN resolved as shift (CHILDA < ADD_ASSIGN).
-    Conflict between rule 27 and token SUB_ASSIGN resolved as shift (CHILDA < SUB_ASSIGN).
-    Conflict between rule 27 and token MUL_ASSIGN resolved as shift (CHILDA < MUL_ASSIGN).
-    Conflict between rule 27 and token DIV_ASSIGN resolved as shift (CHILDA < DIV_ASSIGN).
-    Conflict between rule 27 and token MOD_ASSIGN resolved as shift (CHILDA < MOD_ASSIGN).
+    Conflict between rule 27 and token ASSIGN resolved as reduce (ASSIGN < CHILDA).
+    Conflict between rule 27 and token ADD_ASSIGN resolved as reduce (ADD_ASSIGN < CHILDA).
+    Conflict between rule 27 and token SUB_ASSIGN resolved as reduce (SUB_ASSIGN < CHILDA).
+    Conflict between rule 27 and token MUL_ASSIGN resolved as reduce (MUL_ASSIGN < CHILDA).
+    Conflict between rule 27 and token DIV_ASSIGN resolved as reduce (DIV_ASSIGN < CHILDA).
+    Conflict between rule 27 and token MOD_ASSIGN resolved as reduce (MOD_ASSIGN < CHILDA).
     Conflict between rule 27 and token EQUAL resolved as reduce (EQUAL < CHILDA).
     Conflict between rule 27 and token NOTEQUAL resolved as reduce (NOTEQUAL < CHILDA).
     Conflict between rule 27 and token GT resolved as reduce (GT < CHILDA).

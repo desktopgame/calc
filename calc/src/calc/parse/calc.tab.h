@@ -71,9 +71,9 @@
      RP = 287,
      EXC_OR = 288,
      IDENT = 289,
-     CHILDA = 290,
-     POSITIVE = 291,
-     NEGATIVE = 292
+     POSITIVE = 290,
+     NEGATIVE = 291,
+     CHILDA = 292
    };
 #endif
 /* Tokens.  */
@@ -109,9 +109,9 @@
 #define RP 287
 #define EXC_OR 288
 #define IDENT 289
-#define CHILDA 290
-#define POSITIVE 291
-#define NEGATIVE 292
+#define POSITIVE 290
+#define NEGATIVE 291
+#define CHILDA 292
 
 
 

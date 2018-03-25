@@ -30,9 +30,9 @@
 %left EXC_OR
 %left ADD SUB
 %left MUL DIV MOD
-%left CHILDA
 %left NEGATIVE POSITIVE
 %right ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
+%right CHILDA
 %%
 program
 	: expression
