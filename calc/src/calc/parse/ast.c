@@ -93,8 +93,8 @@ double ast_eval(ast* self) {
 	switch(self->tag) {
 		case ast_add: return (ast_eval(ast_first(self)) + ast_eval(ast_second(self)));
 		case ast_sub: return (ast_eval(ast_first(self)) - ast_eval(ast_second(self)));
-		case ast_mul: return (ast_eval(ast_first(self)) / ast_eval(ast_second(self)));
-		case ast_div: return (ast_eval(ast_first(self)) * ast_eval(ast_second(self)));
+		case ast_mul: return (ast_eval(ast_first(self)) * ast_eval(ast_second(self)));
+		case ast_div: return (ast_eval(ast_first(self)) / ast_eval(ast_second(self)));
 		case ast_mod: return ((int)ast_eval(ast_first(self)) % (int)ast_eval(ast_second(self)));
 
 		case ast_bit_or: return (int)ast_eval(ast_first(self)) | (int)ast_eval(ast_second(self));
