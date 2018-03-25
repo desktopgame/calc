@@ -1,0 +1,485 @@
+Terminals which are not used
+
+   ASSIGN
+   ADD_ASSIGN
+   SUB_ASSIGN
+   MUL_ASSIGN
+   DIV_ASSIGN
+   MOD_ASSIGN
+   EQUAL
+   NOTEQUAL
+   INC
+   DEC
+   GT
+   GE
+   LT
+   LE
+   LSHIFT
+   RSHIFT
+   NOT
+   LOGIC_AND
+   LOGIC_OR
+   IDENT
+   DiV
+
+
+State 13 conflicts: 1 shift/reduce
+State 14 conflicts: 1 shift/reduce
+State 15 conflicts: 1 shift/reduce
+State 16 conflicts: 7 shift/reduce
+State 17 conflicts: 1 shift/reduce
+State 18 conflicts: 1 shift/reduce
+State 19 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: expression
+
+    2 expression: INT
+    3           | DOUBLE
+    4           | expression ADD expression
+    5           | expression SUB expression
+    6           | expression MUL expression
+    7           | expression DIV expression
+    8           | expression MOD expression
+    9           | expression BIT_OR expression
+   10           | expression BIT_AND expression
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+INT (258) 2
+DOUBLE (259) 3
+ADD (260) 4
+SUB (261) 5
+MUL (262) 6
+DIV (263) 7
+MOD (264) 8
+ASSIGN (265)
+ADD_ASSIGN (266)
+SUB_ASSIGN (267)
+MUL_ASSIGN (268)
+DIV_ASSIGN (269)
+MOD_ASSIGN (270)
+EQUAL (271)
+NOTEQUAL (272)
+INC (273)
+DEC (274)
+GT (275)
+GE (276)
+LT (277)
+LE (278)
+LSHIFT (279)
+RSHIFT (280)
+NOT (281)
+BIT_AND (282) 10
+BIT_OR (283) 9
+LOGIC_AND (284)
+LOGIC_OR (285)
+IDENT (286)
+DiV (287)
+
+
+Nonterminals, with rules where they appear
+
+$accept (33)
+    on left: 0
+program (34)
+    on left: 1, on right: 0
+expression (35)
+    on left: 2 3 4 5 6 7 8 9 10, on right: 1 4 5 6 7 8 9 10
+
+
+state 0
+
+    0 $accept: . program $end
+    1 program: . expression
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    program     go to state 3
+    expression  go to state 4
+
+
+state 1
+
+    2 expression: INT .
+
+    $default  reduce using rule 2 (expression)
+
+
+state 2
+
+    3 expression: DOUBLE .
+
+    $default  reduce using rule 3 (expression)
+
+
+state 3
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 5
+
+
+state 4
+
+    1 program: expression .  [$end]
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression
+    6           | expression . MUL expression
+    7           | expression . DIV expression
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression
+
+    ADD      shift, and go to state 6
+    SUB      shift, and go to state 7
+    MUL      shift, and go to state 8
+    DIV      shift, and go to state 9
+    MOD      shift, and go to state 10
+    BIT_AND  shift, and go to state 11
+    BIT_OR   shift, and go to state 12
+
+    $default  reduce using rule 1 (program)
+
+
+state 5
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 6
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    4           | expression ADD . expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 13
+
+
+state 7
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    5           | expression SUB . expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 14
+
+
+state 8
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    6           | expression MUL . expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 15
+
+
+state 9
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    7           | expression DIV . expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 16
+
+
+state 10
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    8           | expression MOD . expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 17
+
+
+state 11
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+   10           | . expression BIT_AND expression
+   10           | expression BIT_AND . expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 18
+
+
+state 12
+
+    2 expression: . INT
+    3           | . DOUBLE
+    4           | . expression ADD expression
+    5           | . expression SUB expression
+    6           | . expression MUL expression
+    7           | . expression DIV expression
+    8           | . expression MOD expression
+    9           | . expression BIT_OR expression
+    9           | expression BIT_OR . expression
+   10           | . expression BIT_AND expression
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+
+    expression  go to state 19
+
+
+state 13
+
+    4 expression: expression . ADD expression  [$end, ADD, SUB, DIV]
+    4           | expression ADD expression .  [$end, ADD, SUB, DIV]
+    5           | expression . SUB expression
+    6           | expression . MUL expression
+    7           | expression . DIV expression
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression
+
+    MUL      shift, and go to state 8
+    DIV      shift, and go to state 9
+    MOD      shift, and go to state 10
+    BIT_AND  shift, and go to state 11
+    BIT_OR   shift, and go to state 12
+
+    DIV       [reduce using rule 4 (expression)]
+    $default  reduce using rule 4 (expression)
+
+    Conflict between rule 4 and token ADD resolved as reduce (%left ADD).
+    Conflict between rule 4 and token SUB resolved as reduce (%left SUB).
+    Conflict between rule 4 and token MUL resolved as shift (ADD < MUL).
+    Conflict between rule 4 and token MOD resolved as shift (ADD < MOD).
+    Conflict between rule 4 and token BIT_AND resolved as shift (ADD < BIT_AND).
+    Conflict between rule 4 and token BIT_OR resolved as shift (ADD < BIT_OR).
+
+
+state 14
+
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression  [$end, ADD, SUB, DIV]
+    5           | expression SUB expression .  [$end, ADD, SUB, DIV]
+    6           | expression . MUL expression
+    7           | expression . DIV expression
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression
+
+    MUL      shift, and go to state 8
+    DIV      shift, and go to state 9
+    MOD      shift, and go to state 10
+    BIT_AND  shift, and go to state 11
+    BIT_OR   shift, and go to state 12
+
+    DIV       [reduce using rule 5 (expression)]
+    $default  reduce using rule 5 (expression)
+
+    Conflict between rule 5 and token ADD resolved as reduce (%left ADD).
+    Conflict between rule 5 and token SUB resolved as reduce (%left SUB).
+    Conflict between rule 5 and token MUL resolved as shift (SUB < MUL).
+    Conflict between rule 5 and token MOD resolved as shift (SUB < MOD).
+    Conflict between rule 5 and token BIT_AND resolved as shift (SUB < BIT_AND).
+    Conflict between rule 5 and token BIT_OR resolved as shift (SUB < BIT_OR).
+
+
+state 15
+
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression
+    6           | expression . MUL expression  [$end, ADD, SUB, MUL, DIV, MOD]
+    6           | expression MUL expression .  [$end, ADD, SUB, MUL, DIV, MOD]
+    7           | expression . DIV expression
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression
+
+    DIV      shift, and go to state 9
+    BIT_AND  shift, and go to state 11
+    BIT_OR   shift, and go to state 12
+
+    DIV       [reduce using rule 6 (expression)]
+    $default  reduce using rule 6 (expression)
+
+    Conflict between rule 6 and token ADD resolved as reduce (ADD < MUL).
+    Conflict between rule 6 and token SUB resolved as reduce (SUB < MUL).
+    Conflict between rule 6 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 6 and token MOD resolved as reduce (%left MOD).
+    Conflict between rule 6 and token BIT_AND resolved as shift (MUL < BIT_AND).
+    Conflict between rule 6 and token BIT_OR resolved as shift (MUL < BIT_OR).
+
+
+state 16
+
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression
+    6           | expression . MUL expression
+    7           | expression . DIV expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR]
+    7           | expression DIV expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR]
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression
+
+    ADD      shift, and go to state 6
+    SUB      shift, and go to state 7
+    MUL      shift, and go to state 8
+    DIV      shift, and go to state 9
+    MOD      shift, and go to state 10
+    BIT_AND  shift, and go to state 11
+    BIT_OR   shift, and go to state 12
+
+    ADD       [reduce using rule 7 (expression)]
+    SUB       [reduce using rule 7 (expression)]
+    MUL       [reduce using rule 7 (expression)]
+    DIV       [reduce using rule 7 (expression)]
+    MOD       [reduce using rule 7 (expression)]
+    BIT_AND   [reduce using rule 7 (expression)]
+    BIT_OR    [reduce using rule 7 (expression)]
+    $default  reduce using rule 7 (expression)
+
+
+state 17
+
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression
+    6           | expression . MUL expression
+    7           | expression . DIV expression
+    8           | expression . MOD expression  [$end, ADD, SUB, MUL, DIV, MOD]
+    8           | expression MOD expression .  [$end, ADD, SUB, MUL, DIV, MOD]
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression
+
+    DIV      shift, and go to state 9
+    BIT_AND  shift, and go to state 11
+    BIT_OR   shift, and go to state 12
+
+    DIV       [reduce using rule 8 (expression)]
+    $default  reduce using rule 8 (expression)
+
+    Conflict between rule 8 and token ADD resolved as reduce (ADD < MOD).
+    Conflict between rule 8 and token SUB resolved as reduce (SUB < MOD).
+    Conflict between rule 8 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 8 and token MOD resolved as reduce (%left MOD).
+    Conflict between rule 8 and token BIT_AND resolved as shift (MOD < BIT_AND).
+    Conflict between rule 8 and token BIT_OR resolved as shift (MOD < BIT_OR).
+
+
+state 18
+
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression
+    6           | expression . MUL expression
+    7           | expression . DIV expression
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression
+   10           | expression . BIT_AND expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND]
+   10           | expression BIT_AND expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND]
+
+    DIV     shift, and go to state 9
+    BIT_OR  shift, and go to state 12
+
+    DIV       [reduce using rule 10 (expression)]
+    $default  reduce using rule 10 (expression)
+
+    Conflict between rule 10 and token ADD resolved as reduce (ADD < BIT_AND).
+    Conflict between rule 10 and token SUB resolved as reduce (SUB < BIT_AND).
+    Conflict between rule 10 and token MUL resolved as reduce (MUL < BIT_AND).
+    Conflict between rule 10 and token MOD resolved as reduce (MOD < BIT_AND).
+    Conflict between rule 10 and token BIT_AND resolved as reduce (%left BIT_AND).
+    Conflict between rule 10 and token BIT_OR resolved as shift (BIT_AND < BIT_OR).
+
+
+state 19
+
+    4 expression: expression . ADD expression
+    5           | expression . SUB expression
+    6           | expression . MUL expression
+    7           | expression . DIV expression
+    8           | expression . MOD expression
+    9           | expression . BIT_OR expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR]
+    9           | expression BIT_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR]
+   10           | expression . BIT_AND expression
+
+    DIV  shift, and go to state 9
+
+    DIV       [reduce using rule 9 (expression)]
+    $default  reduce using rule 9 (expression)
+
+    Conflict between rule 9 and token ADD resolved as reduce (ADD < BIT_OR).
+    Conflict between rule 9 and token SUB resolved as reduce (SUB < BIT_OR).
+    Conflict between rule 9 and token MUL resolved as reduce (MUL < BIT_OR).
+    Conflict between rule 9 and token MOD resolved as reduce (MOD < BIT_OR).
+    Conflict between rule 9 and token BIT_AND resolved as reduce (BIT_AND < BIT_OR).
+    Conflict between rule 9 and token BIT_OR resolved as reduce (%left BIT_OR).
