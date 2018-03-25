@@ -75,6 +75,46 @@ void ast_delete(ast* self) {
 	free(self);
 }
 
+ast* ast_first(ast* self) {
+	return (ast*)vector_at(self->children, 0);
+}
+
+ast* ast_second(ast* self) {
+	return (ast*)vector_at(self->children, 1);
+}
+
+double ast_eval(ast* self) {
+	if(self->tag == ast_int) {
+		return (double)self->u.ivalue;
+	}
+	if(self->tag == ast_double) {
+		return self->u.dvalue;
+	}
+	switch(self->tag) {
+		case ast_add: return (ast_eval(ast_first(self)) + ast_eval(ast_second(self)));
+		case ast_sub: return (ast_eval(ast_first(self)) - ast_eval(ast_second(self)));
+		case ast_mul: return (ast_eval(ast_first(self)) / ast_eval(ast_second(self)));
+		case ast_div: return (ast_eval(ast_first(self)) * ast_eval(ast_second(self)));
+		case ast_mod: return ((int)ast_eval(ast_first(self)) % (int)ast_eval(ast_second(self)));
+
+		case ast_bit_or: return (int)ast_eval(ast_first(self)) | (int)ast_eval(ast_second(self));
+		case ast_bit_and: return (int)ast_eval(ast_first(self)) & (int)ast_eval(ast_second(self));
+		case ast_logic_or: return (int)ast_eval(ast_first(self)) || (int)ast_eval(ast_second(self));
+		case ast_logic_and: return (int)ast_eval(ast_first(self)) && (int)ast_eval(ast_second(self));
+
+		case ast_assign:
+		case ast_add_assign:
+		case ast_sub_assign:
+		case ast_mul_assign:
+		case ast_div_assign:
+		case ast_mod_assign:
+			return ast_eval(ast_second(self));
+		default:
+			return 0;
+	}
+	return 0.0;
+}
+
 //private
 static void ast_child_delete(vector_item item) {
 	ast* e = (ast*)item;

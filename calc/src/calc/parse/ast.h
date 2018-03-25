@@ -53,4 +53,10 @@ void ast_dump(ast* self);
 void ast_print(ast* self);
 
 void ast_delete(ast* self);
+
+ast* ast_first(ast* self);
+
+ast* ast_second(ast* self);
+
+double ast_eval(ast* self);
 #endif
