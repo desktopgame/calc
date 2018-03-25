@@ -26,6 +26,8 @@
 %left BIT_OR
 %left LOGIC_AND
 %left LOGIC_OR
+%right ASSIGN
+%right ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
 %%
 program
 	: expression
@@ -69,6 +71,30 @@ expression
 		$$ = ast_new_binary(ast_bit_or, $1, $3);
 	}
 	| expression LOGIC_AND expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression ADD_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression SUB_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression MUL_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression DIV_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression MOD_ASSIGN expression
 	{
 		$$ = ast_new_binary(ast_bit_and, $1, $3);
 	}
