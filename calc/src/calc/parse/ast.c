@@ -1,5 +1,6 @@
 #include "ast.h"
 #include <stdio.h>
+#include <assert.h>
 
 //proto
 static void ast_child_delete(vector_item item);
@@ -32,6 +33,7 @@ ast* ast_new_binary(ast_tag tag, ast* left, ast* right) {
 }
 
 void ast_push(ast* self, ast* a) {
+	assert(self != NULL && a != NULL);
 	vector_push(self->children, a);
 }
 
@@ -42,6 +44,7 @@ void ast_dump(ast* self) {
 void ast_print(ast* self) {
 	#define p(a) printf((a)); break
 	switch(self->tag) {
+		case ast_root: p("root");
 		case ast_int:
 			printf("%d", self->u.ivalue);
 			break;

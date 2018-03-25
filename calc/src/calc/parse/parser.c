@@ -1,6 +1,7 @@
 #include "parser.h"
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 static parser_input_tag gParserInputTag;
 static FILE* gFakeStdout = NULL;
@@ -62,9 +63,10 @@ static void parser_stdout_swap_begin() {
 	//本物を取っておく
 	gRealStdout = stdout;
 	//適当なファイルを開く
-	char template[] = "temp";
+	char template[] = "temp/cacheXXXXXX";
 	int fd = mkstemp(template);
 	FILE* fp = fdopen(fd, "w");
+	assert(fp != NULL);
 	//stdoutをすり替える
 	gFakeStdout = fp;
 	stdout = fp;
