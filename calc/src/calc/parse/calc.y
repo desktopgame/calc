@@ -19,7 +19,7 @@
 		GT GE LT LE LSHIFT RSHIFT
 		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR
 		IDENT
-%type <ast_value> expression
+%type <ast_value> expression primary
 %left ADD SUB
 %left MUL DiV MOD
 %left BIT_AND
@@ -33,8 +33,7 @@ program
 	}
 	;
 expression
-	: INT
-	| DOUBLE
+	: primary
 	| expression ADD expression
 	{
 		$$ = ast_new_binary(ast_add, $1, $3);
@@ -63,5 +62,9 @@ expression
 	{
 		$$ = ast_new_binary(ast_bit_and, $1, $3);
 	}
+	;
+primary
+	: INT
+	| DOUBLE
 	;
 %%
