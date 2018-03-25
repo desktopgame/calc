@@ -4,13 +4,52 @@
 #include <sys/stat.h>
 #include "parse/parser.h"
 
+char* readall(const char* filename) {
+	FILE* fp = fopen(filename, "r");
+	if(fp == NULL) {
+		return NULL;
+	}
+	char* buf = (char*)malloc(sizeof(char) * 16);
+	int bufsize = 16;
+	int len = 0;
+	memset(buf, '\0', 16);
+	while(1) {
+		char ch = fgetc(fp);
+		if(ch == -1) {
+			break;
+		}
+		if(len >= bufsize) {
+			int newbufsize = bufsize + (bufsize / 2);
+			char* temp = (char*)realloc(buf, sizeof(char) * newbufsize);
+			bufsize = newbufsize;
+			buf = temp;
+			memset(buf + len, '\0', newbufsize - bufsize);
+		}
+		buf[len] = ch;
+		len++;
+	}
+	if(len < bufsize) {
+		char* repaire = (char*)malloc(sizeof(char) * (len + 1));
+		memset(repaire, '\0', len + 1);
+		for(int i=0; i<len; i++) {
+			repaire[i] = buf[i];
+		}
+		free(buf);
+		buf = repaire;
+	}
+	//TODO:バッファが余ることがあるので切り詰める
+	return buf;
+}
+
 void test(const char* filename) {
 	ast* a = parse_from_file(filename);
-	ast_dump(a);
+	char* source = readall(filename);
 	ast* body = ast_first(a);
 	printf("--------------------\n");
+	printf("%s\n", source);
 	printf("%s = %lf\n", filename, ast_eval(body));
 	printf("--------------------\n");
+	free(source);
 	ast_delete(a);
 }
 
