@@ -20,6 +20,11 @@ typedef enum ast_tag {
 	ast_logic_or,
 	ast_exc_or,
 
+	ast_gt,
+	ast_ge,
+	ast_lt,
+	ast_le,
+
 	ast_equal,
 	ast_notequal,
 

@@ -22,11 +22,12 @@
 		IDENT
 %type <ast_value> expression primary
 %left EQUAL NOTEQUAL
+%left GT GE LT LE
 %left LOGIC_AND
 %left LOGIC_OR
+%left BIT_AND
 %left BIT_OR
 %left EXC_OR
-%left BIT_AND
 %left ADD SUB
 %left MUL DIV MOD
 %left NEGATIVE POSITIVE
@@ -120,6 +121,22 @@ expression
 	| expression MOD_ASSIGN expression
 	{
 		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression GT expression
+	{
+		$$ = ast_new_binary(ast_gt, $1, $3);
+	}
+	| expression GE expression
+	{
+		$$ = ast_new_binary(ast_ge, $1, $3);
+	}
+	| expression LT expression
+	{
+		$$ = ast_new_binary(ast_lt, $1, $3);
+	}
+	| expression LE expression
+	{
+		$$ = ast_new_binary(ast_le, $1, $3);
 	}
 	| LP expression RP
 	{

@@ -66,6 +66,13 @@ void ast_print(ast* self) {
 		case ast_equal: p("==");
 		case ast_notequal: p("!=");
 
+		case ast_gt: p(">");
+		case ast_ge: p(">=");
+		case ast_lt: p("<");
+		case ast_le: p("<=");
+
+		case ast_exc_or: p("^");
+
 		case ast_assign: p("=");
 		case ast_add_assign: p("+=");
 		case ast_sub_assign: p("-=");
@@ -111,6 +118,11 @@ double ast_eval(ast* self) {
 		case ast_logic_or: return (int)ast_eval(ast_first(self)) || (int)ast_eval(ast_second(self));
 		case ast_logic_and: return (int)ast_eval(ast_first(self)) && (int)ast_eval(ast_second(self));
 		case ast_exc_or: return (int)ast_eval(ast_first(self)) ^ (int)ast_eval(ast_second(self));
+
+		case ast_gt: return ((int)ast_eval(ast_first(self)) > (int)ast_eval(ast_second(self)));
+		case ast_ge: return ((int)ast_eval(ast_first(self)) >= (int)ast_eval(ast_second(self)));
+		case ast_lt: return ((int)ast_eval(ast_first(self)) < (int)ast_eval(ast_second(self)));
+		case ast_le: return ((int)ast_eval(ast_first(self)) <= (int)ast_eval(ast_second(self)));
 
 		case ast_equal: return ((int)ast_eval(ast_first(self)) == (int)ast_eval(ast_second(self)));
 		case ast_notequal: return ((int)ast_eval(ast_first(self)) != (int)ast_eval(ast_second(self)));
