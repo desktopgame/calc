@@ -24,6 +24,8 @@
 %left MUL DiV MOD
 %left BIT_AND
 %left BIT_OR
+%left LOGIC_AND
+%left LOGIC_OR
 %%
 program
 	: expression
@@ -59,6 +61,14 @@ expression
 		$$ = ast_new_binary(ast_bit_or, $1, $3);
 	}
 	| expression BIT_AND expression
+	{
+		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| expression LOGIC_OR expression
+	{
+		$$ = ast_new_binary(ast_bit_or, $1, $3);
+	}
+	| expression LOGIC_AND expression
 	{
 		$$ = ast_new_binary(ast_bit_and, $1, $3);
 	}
