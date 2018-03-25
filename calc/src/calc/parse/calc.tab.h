@@ -67,8 +67,10 @@
      BIT_OR = 283,
      LOGIC_AND = 284,
      LOGIC_OR = 285,
-     IDENT = 286,
-     DiV = 287
+     LP = 286,
+     RP = 287,
+     IDENT = 288,
+     DiV = 289
    };
 #endif
 /* Tokens.  */
@@ -100,8 +102,10 @@
 #define BIT_OR 283
 #define LOGIC_AND 284
 #define LOGIC_OR 285
-#define IDENT 286
-#define DiV 287
+#define LP 286
+#define RP 287
+#define IDENT 288
+#define DiV 289
 
 
 
@@ -114,7 +118,7 @@ typedef union YYSTYPE
 	char* svalue;
 }
 /* Line 1529 of yacc.c.  */
-#line 118 "calc.tab.h"
+#line 122 "calc.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

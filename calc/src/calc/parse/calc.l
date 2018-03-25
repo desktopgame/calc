@@ -181,6 +181,9 @@ static void update_loc() {
 <INITIAL>"|"				{ return (BIT_OR); }
 <INITIAL>"||"			{ return (LOGIC_OR); }
 
+<INITIAL>"("				{ return (LP); }
+<INITIAL>")"			{ return (RP); }
+
 <INITIAL>"0" {
 	yylval.ast_value = ast_new_int(0);
 	return INT;

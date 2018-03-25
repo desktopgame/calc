@@ -17,7 +17,7 @@
 		ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
 		EQUAL NOTEQUAL INC DEC
 		GT GE LT LE LSHIFT RSHIFT
-		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR
+		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR LP RP
 		IDENT
 %type <ast_value> expression primary
 %left ADD SUB
@@ -61,6 +61,10 @@ expression
 	| expression BIT_AND expression
 	{
 		$$ = ast_new_binary(ast_bit_and, $1, $3);
+	}
+	| LP expression RP
+	{
+		$$ = $2;
 	}
 	;
 primary
