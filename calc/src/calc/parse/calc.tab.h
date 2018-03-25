@@ -70,7 +70,9 @@
      LP = 286,
      RP = 287,
      EXC_OR = 288,
-     IDENT = 289
+     IDENT = 289,
+     POSITIVE = 290,
+     NEGATIVE = 291
    };
 #endif
 /* Tokens.  */
@@ -106,6 +108,8 @@
 #define RP 287
 #define EXC_OR 288
 #define IDENT 289
+#define POSITIVE 290
+#define NEGATIVE 291
 
 
 
@@ -118,7 +122,7 @@ typedef union YYSTYPE
 	char* svalue;
 }
 /* Line 1529 of yacc.c.  */
-#line 122 "calc.tab.h"
+#line 126 "calc.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

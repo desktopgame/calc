@@ -21,6 +21,7 @@
 		EXC_OR
 		IDENT
 %type <ast_value> expression primary
+%left EQUAL NOTEQUAL
 %left ADD SUB
 %left MUL DIV MOD
 %left BIT_AND
@@ -28,6 +29,7 @@
 %left BIT_OR
 %left LOGIC_AND
 %left LOGIC_OR
+%left NEGATIVE POSITIVE
 %right ASSIGN
 %right ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
 %%
@@ -40,6 +42,14 @@ program
 	;
 expression
 	: primary
+	| ADD expression %prec POSITIVE
+	{
+		$$ = $2;
+	}
+	| SUB expression %prec NEGATIVE
+	{
+		$$ = $2;
+	}
 	| expression ADD expression
 	{
 		$$ = ast_new_binary(ast_add, $1, $3);
@@ -63,6 +73,14 @@ expression
 	| expression BIT_OR expression
 	{
 		$$ = ast_new_binary(ast_bit_or, $1, $3);
+	}
+	| expression EQUAL expression
+	{
+		$$ = ast_new_binary(ast_equal, $1, $3);
+	}
+	| expression NOTEQUAL expression
+	{
+		$$ = ast_new_binary(ast_notequal, $1, $3);
 	}
 	| expression BIT_AND expression
 	{

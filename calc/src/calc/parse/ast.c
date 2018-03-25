@@ -57,6 +57,15 @@ void ast_print(ast* self) {
 		case ast_div: p("/");
 		case ast_mod: p("%%");
 
+		case ast_bit_or: p("|");
+		case ast_bit_and: p("&");
+
+		case ast_logic_or: p("||");
+		case ast_logic_and: p("&&");
+
+		case ast_equal: p("==");
+		case ast_notequal: p("!=");
+
 		case ast_assign: p("=");
 		case ast_add_assign: p("+=");
 		case ast_sub_assign: p("-=");
@@ -102,6 +111,9 @@ double ast_eval(ast* self) {
 		case ast_logic_or: return (int)ast_eval(ast_first(self)) || (int)ast_eval(ast_second(self));
 		case ast_logic_and: return (int)ast_eval(ast_first(self)) && (int)ast_eval(ast_second(self));
 		case ast_exc_or: return (int)ast_eval(ast_first(self)) ^ (int)ast_eval(ast_second(self));
+
+		case ast_equal: return ((int)ast_eval(ast_first(self)) == (int)ast_eval(ast_second(self)));
+		case ast_notequal: return ((int)ast_eval(ast_first(self)) != (int)ast_eval(ast_second(self)));
 
 		case ast_assign:
 		case ast_add_assign:
