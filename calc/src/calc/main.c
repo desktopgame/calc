@@ -37,6 +37,7 @@ char* readall(const char* filename) {
 		free(buf);
 		buf = repaire;
 	}
+	fclose(fp);
 	//TODO:バッファが余ることがあるので切り詰める
 	return buf;
 }
