@@ -113,6 +113,9 @@ void test(const char* filename) {
 	int eres = (int)ast_eval(body);
 	printf("C = %d\n", cres);
 	printf("E = %d\n", eres);
+	if(cres != eres) {
+		ast_dump(body);
+	}
 	assert(cres == eres);
 	printf("--------------------\n");
 	free(source);
