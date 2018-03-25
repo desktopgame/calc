@@ -1,0 +1,56 @@
+#ifndef CALC_PARSE_AST_H
+#define CALC_PARSE_AST_H
+#include "../util/vector.h"
+
+typedef enum ast_tag {
+	ast_root,
+	ast_int,
+	ast_double,
+	ast_ident,
+
+	ast_add,
+	ast_sub,
+	ast_mul,
+	ast_div,
+	ast_mod,
+
+	ast_bit_and,
+	ast_bit_or,
+	ast_logic_and,
+	ast_logic_or,
+
+	ast_assign,
+	ast_add_assign,
+	ast_sub_assign,
+	ast_mul_assign,
+	ast_div_assign,
+	ast_mod_assign,
+
+} ast_tag;
+
+typedef struct ast {
+	union {
+		int ivalue;
+		double dvalue;
+		char* svalue;
+	} u;
+	vector* children;
+	ast_tag tag;
+} ast;
+
+ast* ast_new(ast_tag tag);
+
+ast* ast_new_int(int ivalue);
+
+ast* ast_new_double(double dvalue);
+
+ast* ast_new_binary(ast_tag tag, ast* left, ast* right);
+
+void ast_push(ast* self, ast* a);
+
+void ast_dump(ast* self);
+
+void ast_print(ast* self);
+
+void ast_delete(ast* self);
+#endif
