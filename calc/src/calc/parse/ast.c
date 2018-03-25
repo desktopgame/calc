@@ -134,6 +134,8 @@ double ast_eval(ast* self) {
 		case ast_lt: return ((int)ast_eval(ast_first(self)) < (int)ast_eval(ast_second(self)));
 		case ast_le: return ((int)ast_eval(ast_first(self)) <= (int)ast_eval(ast_second(self)));
 
+		case ast_childa: return ~(int)(ast_eval(ast_first(self)));
+
 		case ast_equal: return ((int)ast_eval(ast_first(self)) == (int)ast_eval(ast_second(self)));
 		case ast_notequal: return ((int)ast_eval(ast_first(self)) != (int)ast_eval(ast_second(self)));
 

@@ -30,6 +30,7 @@
 %left EXC_OR
 %left ADD SUB
 %left MUL DIV MOD
+%left CHILDA
 %left NEGATIVE POSITIVE
 %right ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
 %%
@@ -137,6 +138,10 @@ expression
 	| expression LE expression
 	{
 		$$ = ast_new_binary(ast_le, $1, $3);
+	}
+	| CHILDA expression
+	{
+		$$ = ast_new_unary(ast_childa, $2);
 	}
 	| LP expression RP
 	{

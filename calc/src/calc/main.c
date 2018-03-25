@@ -25,7 +25,7 @@ char* readall(const char* filename) {
 			char* temp = (char*)realloc(buf, sizeof(char) * newbufsize);
 			bufsize = newbufsize;
 			buf = temp;
-			memset(buf + len, '\0', newbufsize - bufsize);
+			//memset(buf + len, '\0', newbufsize - bufsize);
 		}
 		buf[len] = ch;
 		len++;
