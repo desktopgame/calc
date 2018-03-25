@@ -11,6 +11,7 @@ typedef enum ast_tag {
 	ast_pos,
 	ast_neg,
 	ast_childa,
+	ast_not,
 
 	ast_add,
 	ast_sub,

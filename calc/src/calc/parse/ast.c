@@ -80,6 +80,7 @@ void ast_print(ast* self) {
 		case ast_le: p("<=");
 
 		case ast_exc_or: p("^");
+		case ast_not: p("!");
 
 		case ast_assign: p("=");
 		case ast_add_assign: p("+=");
@@ -135,6 +136,7 @@ double ast_eval(ast* self) {
 		case ast_le: return ((int)ast_eval(ast_first(self)) <= (int)ast_eval(ast_second(self)));
 
 		case ast_childa: return ~(int)(ast_eval(ast_first(self)));
+		case ast_not: return !(int)(ast_eval(ast_first(self)));
 
 		case ast_equal: return ((int)ast_eval(ast_first(self)) == (int)ast_eval(ast_second(self)));
 		case ast_notequal: return ((int)ast_eval(ast_first(self)) != (int)ast_eval(ast_second(self)));

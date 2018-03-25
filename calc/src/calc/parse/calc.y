@@ -18,7 +18,7 @@
 		EQUAL NOTEQUAL INC DEC
 		GT GE LT LE LSHIFT RSHIFT
 		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR LP RP
-		EXC_OR
+		EXC_OR NOT
 		IDENT
 %type <ast_value> expression primary
 %left EQUAL NOTEQUAL
@@ -32,7 +32,7 @@
 %left MUL DIV MOD
 %left NEGATIVE POSITIVE
 %right ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
-%right CHILDA
+%right CHILDA NOT
 %%
 program
 	: expression
@@ -142,6 +142,10 @@ expression
 	| CHILDA expression
 	{
 		$$ = ast_new_unary(ast_childa, $2);
+	}
+	| NOT expression
+	{
+		$$ = ast_new_unary(ast_not, $2);
 	}
 	| LP expression RP
 	{
