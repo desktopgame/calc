@@ -2,6 +2,8 @@
 #include <dirent.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <assert.h>
+#include <errno.h>
 #include "parse/parser.h"
 
 char* readall(const char* filename) {
@@ -42,13 +44,76 @@ char* readall(const char* filename) {
 	return buf;
 }
 
+void compile(const char* filename, const char* source) {
+	char cfilename[1024] = {0};
+	char ofilename[1024] = {0};
+	//C言語のソースファイル名
+	int res = sprintf(cfilename, "c/%s_c.c", filename);
+	assert(res != -1);
+	//C言語の実行ファイル名
+	res = sprintf(ofilename,"c/%s_c.a", filename);
+	assert(res != -1);
+	//読み取り専用で開いてみて成功したらもうコンパイル済み
+	FILE* fp = fopen(cfilename, "r");
+	if(fp != NULL) {
+		fclose(fp);
+		return;
+	}
+	//まだ存在しないので作る
+	fp = fopen(cfilename, "w");
+	fprintf(fp, "#include <stdio.h>\n\n");
+	fprintf(fp, "int main(int argc, char* argv[]) { \n");
+	fprintf(fp, "    printf(\"%%d\", (int)(%s));\n", source);
+	fprintf(fp, "    fflush(stdout);\n");
+	fprintf(fp, "    return 0;\n");
+	fprintf(fp, "}");
+	fclose(fp);
+	//コンパイルする
+	char cmd[1024] = {0};
+	res = sprintf(cmd, "clang %s -o %s", cfilename, ofilename);
+	assert(res != -1);
+	system(cmd);
+}
+
+int run(const char* filename) {
+	char ofilename[1024] = {0};
+	int res = sprintf(ofilename,"./c/%s_c.a", filename);
+	assert(res != -1);
+	//printf("%s", ofilename);
+	//fflush(stdout);
+	errno = 0;
+	FILE* output = popen(ofilename, "r");
+	if(output == NULL) {
+		perror("fail");
+		return -1;
+	}
+	char ret_buf[1024] = {0};
+	int offs = 0;
+	while(1) {
+		char ch = fgetc(output);
+		if(ch == -1) {
+			break;
+		}
+		ret_buf[offs] = ch;
+		offs++;
+		assert(offs < 1024);
+	}
+	pclose(output);
+	return atoi(ret_buf);
+}
+
 void test(const char* filename) {
 	ast* a = parse_from_file(filename);
 	char* source = readall(filename);
+	compile(filename, source);
 	ast* body = ast_first(a);
-	printf("--------------------\n");
+	printf("[%s]\n", filename);
 	printf("%s\n", source);
-	printf("%s = %lf\n", filename, ast_eval(body));
+	int cres = run(filename);
+	int eres = (int)ast_eval(body);
+	printf("C = %d\n", cres);
+	printf("E = %d\n", eres);
+	assert(cres == eres);
 	printf("--------------------\n");
 	free(source);
 	ast_delete(a);
