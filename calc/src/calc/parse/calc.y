@@ -21,7 +21,7 @@
 		IDENT
 %type <ast_value> expression primary
 %left ADD SUB
-%left MUL DiV MOD
+%left MUL DIV MOD
 %left BIT_AND
 %left BIT_OR
 %left LOGIC_AND

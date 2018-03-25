@@ -18,18 +18,6 @@ Terminals which are not used
    RSHIFT
    NOT
    IDENT
-   DiV
-
-
-State 19 conflicts: 1 shift/reduce
-State 20 conflicts: 1 shift/reduce
-State 21 conflicts: 1 shift/reduce
-State 22 conflicts: 9 shift/reduce
-State 23 conflicts: 1 shift/reduce
-State 24 conflicts: 1 shift/reduce
-State 25 conflicts: 1 shift/reduce
-State 26 conflicts: 1 shift/reduce
-State 27 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -89,19 +77,18 @@ LOGIC_OR (285) 10
 LP (286) 12
 RP (287) 12
 IDENT (288)
-DiV (289)
 
 
 Nonterminals, with rules where they appear
 
-$accept (35)
+$accept (34)
     on left: 0
-program (36)
+program (35)
     on left: 1, on right: 0
-expression (37)
+expression (36)
     on left: 2 3 4 5 6 7 8 9 10 11 12, on right: 1 3 4 5 6 7 8 9 10
     11 12
-primary (38)
+primary (37)
     on left: 13 14, on right: 2
 
 
@@ -477,8 +464,8 @@ state 18
 
 state 19
 
-    3 expression: expression . ADD expression  [$end, ADD, SUB, DIV, RP]
-    3           | expression ADD expression .  [$end, ADD, SUB, DIV, RP]
+    3 expression: expression . ADD expression  [$end, ADD, SUB, RP]
+    3           | expression ADD expression .  [$end, ADD, SUB, RP]
     4           | expression . SUB expression
     5           | expression . MUL expression
     6           | expression . DIV expression
@@ -496,12 +483,12 @@ state 19
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    DIV       [reduce using rule 3 (expression)]
     $default  reduce using rule 3 (expression)
 
     Conflict between rule 3 and token ADD resolved as reduce (%left ADD).
     Conflict between rule 3 and token SUB resolved as reduce (%left SUB).
     Conflict between rule 3 and token MUL resolved as shift (ADD < MUL).
+    Conflict between rule 3 and token DIV resolved as shift (ADD < DIV).
     Conflict between rule 3 and token MOD resolved as shift (ADD < MOD).
     Conflict between rule 3 and token BIT_AND resolved as shift (ADD < BIT_AND).
     Conflict between rule 3 and token BIT_OR resolved as shift (ADD < BIT_OR).
@@ -512,8 +499,8 @@ state 19
 state 20
 
     3 expression: expression . ADD expression
-    4           | expression . SUB expression  [$end, ADD, SUB, DIV, RP]
-    4           | expression SUB expression .  [$end, ADD, SUB, DIV, RP]
+    4           | expression . SUB expression  [$end, ADD, SUB, RP]
+    4           | expression SUB expression .  [$end, ADD, SUB, RP]
     5           | expression . MUL expression
     6           | expression . DIV expression
     7           | expression . MOD expression
@@ -530,12 +517,12 @@ state 20
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    DIV       [reduce using rule 4 (expression)]
     $default  reduce using rule 4 (expression)
 
     Conflict between rule 4 and token ADD resolved as reduce (%left ADD).
     Conflict between rule 4 and token SUB resolved as reduce (%left SUB).
     Conflict between rule 4 and token MUL resolved as shift (SUB < MUL).
+    Conflict between rule 4 and token DIV resolved as shift (SUB < DIV).
     Conflict between rule 4 and token MOD resolved as shift (SUB < MOD).
     Conflict between rule 4 and token BIT_AND resolved as shift (SUB < BIT_AND).
     Conflict between rule 4 and token BIT_OR resolved as shift (SUB < BIT_OR).
@@ -556,18 +543,17 @@ state 21
    10           | expression . LOGIC_OR expression
    11           | expression . LOGIC_AND expression
 
-    DIV        shift, and go to state 12
     BIT_AND    shift, and go to state 14
     BIT_OR     shift, and go to state 15
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    DIV       [reduce using rule 5 (expression)]
     $default  reduce using rule 5 (expression)
 
     Conflict between rule 5 and token ADD resolved as reduce (ADD < MUL).
     Conflict between rule 5 and token SUB resolved as reduce (SUB < MUL).
     Conflict between rule 5 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 5 and token DIV resolved as reduce (%left DIV).
     Conflict between rule 5 and token MOD resolved as reduce (%left MOD).
     Conflict between rule 5 and token BIT_AND resolved as shift (MUL < BIT_AND).
     Conflict between rule 5 and token BIT_OR resolved as shift (MUL < BIT_OR).
@@ -580,34 +566,30 @@ state 22
     3 expression: expression . ADD expression
     4           | expression . SUB expression
     5           | expression . MUL expression
-    6           | expression . DIV expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
-    6           | expression DIV expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
+    6           | expression . DIV expression  [$end, ADD, SUB, MUL, DIV, MOD, RP]
+    6           | expression DIV expression .  [$end, ADD, SUB, MUL, DIV, MOD, RP]
     7           | expression . MOD expression
     8           | expression . BIT_OR expression
     9           | expression . BIT_AND expression
    10           | expression . LOGIC_OR expression
    11           | expression . LOGIC_AND expression
 
-    ADD        shift, and go to state 9
-    SUB        shift, and go to state 10
-    MUL        shift, and go to state 11
-    DIV        shift, and go to state 12
-    MOD        shift, and go to state 13
     BIT_AND    shift, and go to state 14
     BIT_OR     shift, and go to state 15
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    ADD        [reduce using rule 6 (expression)]
-    SUB        [reduce using rule 6 (expression)]
-    MUL        [reduce using rule 6 (expression)]
-    DIV        [reduce using rule 6 (expression)]
-    MOD        [reduce using rule 6 (expression)]
-    BIT_AND    [reduce using rule 6 (expression)]
-    BIT_OR     [reduce using rule 6 (expression)]
-    LOGIC_AND  [reduce using rule 6 (expression)]
-    LOGIC_OR   [reduce using rule 6 (expression)]
-    $default   reduce using rule 6 (expression)
+    $default  reduce using rule 6 (expression)
+
+    Conflict between rule 6 and token ADD resolved as reduce (ADD < DIV).
+    Conflict between rule 6 and token SUB resolved as reduce (SUB < DIV).
+    Conflict between rule 6 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 6 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 6 and token MOD resolved as reduce (%left MOD).
+    Conflict between rule 6 and token BIT_AND resolved as shift (DIV < BIT_AND).
+    Conflict between rule 6 and token BIT_OR resolved as shift (DIV < BIT_OR).
+    Conflict between rule 6 and token LOGIC_AND resolved as shift (DIV < LOGIC_AND).
+    Conflict between rule 6 and token LOGIC_OR resolved as shift (DIV < LOGIC_OR).
 
 
 state 23
@@ -623,18 +605,17 @@ state 23
    10           | expression . LOGIC_OR expression
    11           | expression . LOGIC_AND expression
 
-    DIV        shift, and go to state 12
     BIT_AND    shift, and go to state 14
     BIT_OR     shift, and go to state 15
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    DIV       [reduce using rule 7 (expression)]
     $default  reduce using rule 7 (expression)
 
     Conflict between rule 7 and token ADD resolved as reduce (ADD < MOD).
     Conflict between rule 7 and token SUB resolved as reduce (SUB < MOD).
     Conflict between rule 7 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 7 and token DIV resolved as reduce (%left DIV).
     Conflict between rule 7 and token MOD resolved as reduce (%left MOD).
     Conflict between rule 7 and token BIT_AND resolved as shift (MOD < BIT_AND).
     Conflict between rule 7 and token BIT_OR resolved as shift (MOD < BIT_OR).
@@ -655,17 +636,16 @@ state 24
    10           | expression . LOGIC_OR expression
    11           | expression . LOGIC_AND expression
 
-    DIV        shift, and go to state 12
     BIT_OR     shift, and go to state 15
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    DIV       [reduce using rule 9 (expression)]
     $default  reduce using rule 9 (expression)
 
     Conflict between rule 9 and token ADD resolved as reduce (ADD < BIT_AND).
     Conflict between rule 9 and token SUB resolved as reduce (SUB < BIT_AND).
     Conflict between rule 9 and token MUL resolved as reduce (MUL < BIT_AND).
+    Conflict between rule 9 and token DIV resolved as reduce (DIV < BIT_AND).
     Conflict between rule 9 and token MOD resolved as reduce (MOD < BIT_AND).
     Conflict between rule 9 and token BIT_AND resolved as reduce (%left BIT_AND).
     Conflict between rule 9 and token BIT_OR resolved as shift (BIT_AND < BIT_OR).
@@ -686,16 +666,15 @@ state 25
    10           | expression . LOGIC_OR expression
    11           | expression . LOGIC_AND expression
 
-    DIV        shift, and go to state 12
     LOGIC_AND  shift, and go to state 16
     LOGIC_OR   shift, and go to state 17
 
-    DIV       [reduce using rule 8 (expression)]
     $default  reduce using rule 8 (expression)
 
     Conflict between rule 8 and token ADD resolved as reduce (ADD < BIT_OR).
     Conflict between rule 8 and token SUB resolved as reduce (SUB < BIT_OR).
     Conflict between rule 8 and token MUL resolved as reduce (MUL < BIT_OR).
+    Conflict between rule 8 and token DIV resolved as reduce (DIV < BIT_OR).
     Conflict between rule 8 and token MOD resolved as reduce (MOD < BIT_OR).
     Conflict between rule 8 and token BIT_AND resolved as reduce (BIT_AND < BIT_OR).
     Conflict between rule 8 and token BIT_OR resolved as reduce (%left BIT_OR).
@@ -716,15 +695,14 @@ state 26
    11           | expression . LOGIC_AND expression  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, RP]
    11           | expression LOGIC_AND expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, RP]
 
-    DIV       shift, and go to state 12
     LOGIC_OR  shift, and go to state 17
 
-    DIV       [reduce using rule 11 (expression)]
     $default  reduce using rule 11 (expression)
 
     Conflict between rule 11 and token ADD resolved as reduce (ADD < LOGIC_AND).
     Conflict between rule 11 and token SUB resolved as reduce (SUB < LOGIC_AND).
     Conflict between rule 11 and token MUL resolved as reduce (MUL < LOGIC_AND).
+    Conflict between rule 11 and token DIV resolved as reduce (DIV < LOGIC_AND).
     Conflict between rule 11 and token MOD resolved as reduce (MOD < LOGIC_AND).
     Conflict between rule 11 and token BIT_AND resolved as reduce (BIT_AND < LOGIC_AND).
     Conflict between rule 11 and token BIT_OR resolved as reduce (BIT_OR < LOGIC_AND).
@@ -745,14 +723,12 @@ state 27
    10           | expression LOGIC_OR expression .  [$end, ADD, SUB, MUL, DIV, MOD, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP]
    11           | expression . LOGIC_AND expression
 
-    DIV  shift, and go to state 12
-
-    DIV       [reduce using rule 10 (expression)]
     $default  reduce using rule 10 (expression)
 
     Conflict between rule 10 and token ADD resolved as reduce (ADD < LOGIC_OR).
     Conflict between rule 10 and token SUB resolved as reduce (SUB < LOGIC_OR).
     Conflict between rule 10 and token MUL resolved as reduce (MUL < LOGIC_OR).
+    Conflict between rule 10 and token DIV resolved as reduce (DIV < LOGIC_OR).
     Conflict between rule 10 and token MOD resolved as reduce (MOD < LOGIC_OR).
     Conflict between rule 10 and token BIT_AND resolved as reduce (BIT_AND < LOGIC_OR).
     Conflict between rule 10 and token BIT_OR resolved as reduce (BIT_OR < LOGIC_OR).
