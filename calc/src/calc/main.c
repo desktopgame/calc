@@ -133,7 +133,7 @@ void string_sub(const char* source, char* block, int offs, int len) {
 	}
 }
 
-int main(int argc, char* argv[]) {
+void runall() {
 	//実行時ディレクトリの .calc をテスト
 	const char* dirname = ".";
 	DIR *dir = opendir(dirname);
@@ -152,5 +152,9 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	closedir(dir);
+}
+
+int main(int argc, char* argv[]) {
+	for(int i=0; i<3; i++) runall();
 	return 0;
 }
