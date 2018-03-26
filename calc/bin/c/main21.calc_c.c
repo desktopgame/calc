@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) { 
-    printf("%d", (int)(!(10 | 10)));
-    fflush(stdout);
+    int a = (int)(!(10 | 10));
+    printf("%d", a);
+    printf("\n");
     return 0;
 }

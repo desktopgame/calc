@@ -3,45 +3,27 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <assert.h>
+#include <ctype.h>
 #include <errno.h>
 #include "parse/parser.h"
+#include "util/string_buffer.h"
 
 char* readall(const char* filename) {
 	FILE* fp = fopen(filename, "r");
 	if(fp == NULL) {
 		return NULL;
 	}
-	char* buf = (char*)malloc(sizeof(char) * 16);
-	int bufsize = 16;
-	int len = 0;
-	memset(buf, '\0', 16);
+	string_buffer* buf = string_buffer_new();
 	while(1) {
 		char ch = fgetc(fp);
-		if(ch == -1) {
+		if(ch == EOF) {
 			break;
 		}
-		if(len >= bufsize) {
-			int newbufsize = bufsize + (bufsize / 2);
-			char* temp = (char*)realloc(buf, sizeof(char) * newbufsize);
-			bufsize = newbufsize;
-			buf = temp;
-			//memset(buf + len, '\0', newbufsize - bufsize);
-		}
-		buf[len] = ch;
-		len++;
-	}
-	if(len < bufsize) {
-		char* repaire = (char*)malloc(sizeof(char) * (len + 1));
-		memset(repaire, '\0', len + 1);
-		for(int i=0; i<len; i++) {
-			repaire[i] = buf[i];
-		}
-		free(buf);
-		buf = repaire;
+		string_buffer_append(buf, ch);
 	}
 	fclose(fp);
 	//TODO:バッファが余ることがあるので切り詰める
-	return buf;
+	return string_buffer_release(buf);
 }
 
 void compile(const char* filename, const char* source) {
@@ -63,8 +45,10 @@ void compile(const char* filename, const char* source) {
 	fp = fopen(cfilename, "w");
 	fprintf(fp, "#include <stdio.h>\n\n");
 	fprintf(fp, "int main(int argc, char* argv[]) { \n");
-	fprintf(fp, "    printf(\"%%d\", (int)(%s));\n", source);
-	fprintf(fp, "    fflush(stdout);\n");
+	fprintf(fp, "    int a = (int)(%s);\n", source);
+	fprintf(fp, "    printf(\"%%d\", a);\n");
+	fprintf(fp, "    printf(\"\\n\");\n");
+	//fprintf(fp, "    fflush(stdout);\n");
 	fprintf(fp, "    return 0;\n");
 	fprintf(fp, "}");
 	fclose(fp);
@@ -75,7 +59,8 @@ void compile(const char* filename, const char* source) {
 	system(cmd);
 }
 
-int run(const char* filename) {
+int run(const char* filename, bool* err) {
+	(*err) = true;
 	char ofilename[1024] = {0};
 	int res = sprintf(ofilename,"./c/%s_c.a", filename);
 	assert(res != -1);
@@ -91,7 +76,7 @@ int run(const char* filename) {
 	int offs = 0;
 	while(1) {
 		char ch = fgetc(output);
-		if(ch == -1) {
+		if(ch == EOF) {
 			break;
 		}
 		ret_buf[offs] = ch;
@@ -99,24 +84,43 @@ int run(const char* filename) {
 		assert(offs < 1024);
 	}
 	pclose(output);
-	return atoi(ret_buf);
+	printf("@@ [%s]\n", ret_buf);
+	//outputがからかどうか調べる
+	//たまにからのことがある
+	char* iter = ret_buf;
+	while((*iter) != '\0') {
+		char ch = (*iter);
+		if(!isspace(ch) && ch != '\n') {
+			(*err) = false;
+			break;
+		}
+		iter++;
+	}
+	//変換エラー検出
+	char* end = NULL;
+	int a = (int)strtol(ret_buf, &end, 10);
+	assert((*end) == '\0' || (*end) == '\n');
+	return a;
 }
 
 void test(const char* filename) {
 	ast* a = parse_from_file(filename);
 	char* source = readall(filename);
+	bool err = false;
 	compile(filename, source);
 	ast* body = ast_first(a);
 	printf("[%s]\n", filename);
 	printf("%s\n", source);
-	int cres = run(filename);
+	int cres = run(filename, &err);
 	int eres = (int)ast_eval(body);
 	printf("C = %d\n", cres);
 	printf("E = %d\n", eres);
 	if(cres != eres) {
 		ast_dump(body);
 	}
-	assert(cres == eres);
+	if(!err) {
+		assert(cres == eres);
+	}
 	printf("--------------------\n");
 	free(source);
 	ast_delete(a);

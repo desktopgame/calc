@@ -28,6 +28,7 @@
 %left BIT_AND
 %left BIT_OR
 %left EXC_OR
+%left LSHIFT RSHIFT
 %left ADD SUB
 %left MUL DIV MOD
 %left NEGATIVE POSITIVE
@@ -138,6 +139,12 @@ expression
 	| expression LE expression
 	{
 		$$ = ast_new_binary(ast_le, $1, $3);
+	}
+	| expression LSHIFT expression {
+		$$ = ast_new_binary(ast_lshift, $1, $3);
+	}
+	| expression RSHIFT expression {
+		$$ = ast_new_binary(ast_rshift, $1, $3);
 	}
 	| CHILDA expression
 	{

@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) { 
-    printf("%d", (int)(0 == 1 - 1));
-    fflush(stdout);
+    int a = (int)(0 == 1 - 1);
+    printf("%d", a);
+    printf("\n");
     return 0;
 }

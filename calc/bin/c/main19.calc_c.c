@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) { 
-    printf("%d", (int)(~(2 + 2)));
-    fflush(stdout);
+    int a = (int)(~(2 + 2));
+    printf("%d", a);
+    printf("\n");
     return 0;
 }

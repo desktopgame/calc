@@ -2,8 +2,6 @@ Terminals which are not used
 
    INC
    DEC
-   LSHIFT
-   RSHIFT
    IDENT
 
 
@@ -38,20 +36,22 @@ Grammar
    24           | expression GE expression
    25           | expression LT expression
    26           | expression LE expression
-   27           | CHILDA expression
-   28           | NOT expression
-   29           | LP expression RP
+   27           | expression LSHIFT expression
+   28           | expression RSHIFT expression
+   29           | CHILDA expression
+   30           | NOT expression
+   31           | LP expression RP
 
-   30 primary: INT
-   31        | DOUBLE
+   32 primary: INT
+   33        | DOUBLE
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-INT (258) 30
-DOUBLE (259) 31
+INT (258) 32
+DOUBLE (259) 33
 ADD (260) 3 5
 SUB (261) 4 6
 MUL (262) 7
@@ -71,20 +71,20 @@ GT (275) 23
 GE (276) 24
 LT (277) 25
 LE (278) 26
-LSHIFT (279)
-RSHIFT (280)
-NOT (281) 28
+LSHIFT (279) 27
+RSHIFT (280) 28
+NOT (281) 30
 BIT_AND (282) 13
 BIT_OR (283) 10
 LOGIC_AND (284) 16
 LOGIC_OR (285) 15
-LP (286) 29
-RP (287) 29
+LP (286) 31
+RP (287) 31
 EXC_OR (288) 14
 IDENT (289)
 POSITIVE (290)
 NEGATIVE (291)
-CHILDA (292) 27
+CHILDA (292) 29
 
 
 Nonterminals, with rules where they appear
@@ -95,10 +95,10 @@ program (39)
     on left: 1, on right: 0
 expression (40)
     on left: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22
-    23 24 25 26 27 28 29, on right: 1 3 4 5 6 7 8 9 10 11 12 13 14
-    15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+    23 24 25 26 27 28 29 30 31, on right: 1 3 4 5 6 7 8 9 10 11 12
+    13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 primary (41)
-    on left: 30 31, on right: 2
+    on left: 32 33, on right: 2
 
 
 state 0
@@ -130,11 +130,13 @@ state 0
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -151,16 +153,16 @@ state 0
 
 state 1
 
-   30 primary: INT .
+   32 primary: INT .
 
-    $default  reduce using rule 30 (primary)
+    $default  reduce using rule 32 (primary)
 
 
 state 2
 
-   31 primary: DOUBLE .
+   33 primary: DOUBLE .
 
-    $default  reduce using rule 31 (primary)
+    $default  reduce using rule 33 (primary)
 
 
 state 3
@@ -191,11 +193,13 @@ state 3
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -237,11 +241,13 @@ state 4
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -282,12 +288,14 @@ state 5
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   28           | NOT . expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   30           | NOT . expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -328,12 +336,14 @@ state 6
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   29           | LP . expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   31           | LP . expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -374,12 +384,14 @@ state 7
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   27           | CHILDA . expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   29           | CHILDA . expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -425,6 +437,8 @@ state 9
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -443,11 +457,13 @@ state 9
     GE          shift, and go to state 31
     LT          shift, and go to state 32
     LE          shift, and go to state 33
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 1 (program)
 
@@ -461,7 +477,7 @@ state 10
 
 state 11
 
-    3 expression: ADD expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    3 expression: ADD expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
     5           | expression . ADD expression
     6           | expression . SUB expression
     7           | expression . MUL expression
@@ -484,6 +500,8 @@ state 11
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -511,6 +529,8 @@ state 11
     Conflict between rule 3 and token GE resolved as reduce (GE < POSITIVE).
     Conflict between rule 3 and token LT resolved as reduce (LT < POSITIVE).
     Conflict between rule 3 and token LE resolved as reduce (LE < POSITIVE).
+    Conflict between rule 3 and token LSHIFT resolved as reduce (LSHIFT < POSITIVE).
+    Conflict between rule 3 and token RSHIFT resolved as reduce (RSHIFT < POSITIVE).
     Conflict between rule 3 and token BIT_AND resolved as reduce (BIT_AND < POSITIVE).
     Conflict between rule 3 and token BIT_OR resolved as reduce (BIT_OR < POSITIVE).
     Conflict between rule 3 and token LOGIC_AND resolved as reduce (LOGIC_AND < POSITIVE).
@@ -520,7 +540,7 @@ state 11
 
 state 12
 
-    4 expression: SUB expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    4 expression: SUB expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
     5           | expression . ADD expression
     6           | expression . SUB expression
     7           | expression . MUL expression
@@ -543,6 +563,8 @@ state 12
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -570,6 +592,8 @@ state 12
     Conflict between rule 4 and token GE resolved as reduce (GE < NEGATIVE).
     Conflict between rule 4 and token LT resolved as reduce (LT < NEGATIVE).
     Conflict between rule 4 and token LE resolved as reduce (LE < NEGATIVE).
+    Conflict between rule 4 and token LSHIFT resolved as reduce (LSHIFT < NEGATIVE).
+    Conflict between rule 4 and token RSHIFT resolved as reduce (RSHIFT < NEGATIVE).
     Conflict between rule 4 and token BIT_AND resolved as reduce (BIT_AND < NEGATIVE).
     Conflict between rule 4 and token BIT_OR resolved as reduce (BIT_OR < NEGATIVE).
     Conflict between rule 4 and token LOGIC_AND resolved as reduce (LOGIC_AND < NEGATIVE).
@@ -601,32 +625,36 @@ state 13
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
-   28           | NOT expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
+   30           | NOT expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
 
-    $default  reduce using rule 28 (expression)
+    $default  reduce using rule 30 (expression)
 
-    Conflict between rule 28 and token ADD resolved as reduce (ADD < NOT).
-    Conflict between rule 28 and token SUB resolved as reduce (SUB < NOT).
-    Conflict between rule 28 and token MUL resolved as reduce (MUL < NOT).
-    Conflict between rule 28 and token DIV resolved as reduce (DIV < NOT).
-    Conflict between rule 28 and token MOD resolved as reduce (MOD < NOT).
-    Conflict between rule 28 and token ASSIGN resolved as reduce (ASSIGN < NOT).
-    Conflict between rule 28 and token ADD_ASSIGN resolved as reduce (ADD_ASSIGN < NOT).
-    Conflict between rule 28 and token SUB_ASSIGN resolved as reduce (SUB_ASSIGN < NOT).
-    Conflict between rule 28 and token MUL_ASSIGN resolved as reduce (MUL_ASSIGN < NOT).
-    Conflict between rule 28 and token DIV_ASSIGN resolved as reduce (DIV_ASSIGN < NOT).
-    Conflict between rule 28 and token MOD_ASSIGN resolved as reduce (MOD_ASSIGN < NOT).
-    Conflict between rule 28 and token EQUAL resolved as reduce (EQUAL < NOT).
-    Conflict between rule 28 and token NOTEQUAL resolved as reduce (NOTEQUAL < NOT).
-    Conflict between rule 28 and token GT resolved as reduce (GT < NOT).
-    Conflict between rule 28 and token GE resolved as reduce (GE < NOT).
-    Conflict between rule 28 and token LT resolved as reduce (LT < NOT).
-    Conflict between rule 28 and token LE resolved as reduce (LE < NOT).
-    Conflict between rule 28 and token BIT_AND resolved as reduce (BIT_AND < NOT).
-    Conflict between rule 28 and token BIT_OR resolved as reduce (BIT_OR < NOT).
-    Conflict between rule 28 and token LOGIC_AND resolved as reduce (LOGIC_AND < NOT).
-    Conflict between rule 28 and token LOGIC_OR resolved as reduce (LOGIC_OR < NOT).
-    Conflict between rule 28 and token EXC_OR resolved as reduce (EXC_OR < NOT).
+    Conflict between rule 30 and token ADD resolved as reduce (ADD < NOT).
+    Conflict between rule 30 and token SUB resolved as reduce (SUB < NOT).
+    Conflict between rule 30 and token MUL resolved as reduce (MUL < NOT).
+    Conflict between rule 30 and token DIV resolved as reduce (DIV < NOT).
+    Conflict between rule 30 and token MOD resolved as reduce (MOD < NOT).
+    Conflict between rule 30 and token ASSIGN resolved as reduce (ASSIGN < NOT).
+    Conflict between rule 30 and token ADD_ASSIGN resolved as reduce (ADD_ASSIGN < NOT).
+    Conflict between rule 30 and token SUB_ASSIGN resolved as reduce (SUB_ASSIGN < NOT).
+    Conflict between rule 30 and token MUL_ASSIGN resolved as reduce (MUL_ASSIGN < NOT).
+    Conflict between rule 30 and token DIV_ASSIGN resolved as reduce (DIV_ASSIGN < NOT).
+    Conflict between rule 30 and token MOD_ASSIGN resolved as reduce (MOD_ASSIGN < NOT).
+    Conflict between rule 30 and token EQUAL resolved as reduce (EQUAL < NOT).
+    Conflict between rule 30 and token NOTEQUAL resolved as reduce (NOTEQUAL < NOT).
+    Conflict between rule 30 and token GT resolved as reduce (GT < NOT).
+    Conflict between rule 30 and token GE resolved as reduce (GE < NOT).
+    Conflict between rule 30 and token LT resolved as reduce (LT < NOT).
+    Conflict between rule 30 and token LE resolved as reduce (LE < NOT).
+    Conflict between rule 30 and token LSHIFT resolved as reduce (LSHIFT < NOT).
+    Conflict between rule 30 and token RSHIFT resolved as reduce (RSHIFT < NOT).
+    Conflict between rule 30 and token BIT_AND resolved as reduce (BIT_AND < NOT).
+    Conflict between rule 30 and token BIT_OR resolved as reduce (BIT_OR < NOT).
+    Conflict between rule 30 and token LOGIC_AND resolved as reduce (LOGIC_AND < NOT).
+    Conflict between rule 30 and token LOGIC_OR resolved as reduce (LOGIC_OR < NOT).
+    Conflict between rule 30 and token EXC_OR resolved as reduce (EXC_OR < NOT).
 
 
 state 14
@@ -653,7 +681,9 @@ state 14
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
-   29           | LP expression . RP
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
+   31           | LP expression . RP
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -672,12 +702,14 @@ state 14
     GE          shift, and go to state 31
     LT          shift, and go to state 32
     LE          shift, and go to state 33
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    RP          shift, and go to state 39
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    RP          shift, and go to state 41
+    EXC_OR      shift, and go to state 40
 
 
 state 15
@@ -704,32 +736,36 @@ state 15
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
-   27           | CHILDA expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
+   29           | CHILDA expression .  [$end, ADD, SUB, MUL, DIV, MOD, ASSIGN, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
 
-    $default  reduce using rule 27 (expression)
+    $default  reduce using rule 29 (expression)
 
-    Conflict between rule 27 and token ADD resolved as reduce (ADD < CHILDA).
-    Conflict between rule 27 and token SUB resolved as reduce (SUB < CHILDA).
-    Conflict between rule 27 and token MUL resolved as reduce (MUL < CHILDA).
-    Conflict between rule 27 and token DIV resolved as reduce (DIV < CHILDA).
-    Conflict between rule 27 and token MOD resolved as reduce (MOD < CHILDA).
-    Conflict between rule 27 and token ASSIGN resolved as reduce (ASSIGN < CHILDA).
-    Conflict between rule 27 and token ADD_ASSIGN resolved as reduce (ADD_ASSIGN < CHILDA).
-    Conflict between rule 27 and token SUB_ASSIGN resolved as reduce (SUB_ASSIGN < CHILDA).
-    Conflict between rule 27 and token MUL_ASSIGN resolved as reduce (MUL_ASSIGN < CHILDA).
-    Conflict between rule 27 and token DIV_ASSIGN resolved as reduce (DIV_ASSIGN < CHILDA).
-    Conflict between rule 27 and token MOD_ASSIGN resolved as reduce (MOD_ASSIGN < CHILDA).
-    Conflict between rule 27 and token EQUAL resolved as reduce (EQUAL < CHILDA).
-    Conflict between rule 27 and token NOTEQUAL resolved as reduce (NOTEQUAL < CHILDA).
-    Conflict between rule 27 and token GT resolved as reduce (GT < CHILDA).
-    Conflict between rule 27 and token GE resolved as reduce (GE < CHILDA).
-    Conflict between rule 27 and token LT resolved as reduce (LT < CHILDA).
-    Conflict between rule 27 and token LE resolved as reduce (LE < CHILDA).
-    Conflict between rule 27 and token BIT_AND resolved as reduce (BIT_AND < CHILDA).
-    Conflict between rule 27 and token BIT_OR resolved as reduce (BIT_OR < CHILDA).
-    Conflict between rule 27 and token LOGIC_AND resolved as reduce (LOGIC_AND < CHILDA).
-    Conflict between rule 27 and token LOGIC_OR resolved as reduce (LOGIC_OR < CHILDA).
-    Conflict between rule 27 and token EXC_OR resolved as reduce (EXC_OR < CHILDA).
+    Conflict between rule 29 and token ADD resolved as reduce (ADD < CHILDA).
+    Conflict between rule 29 and token SUB resolved as reduce (SUB < CHILDA).
+    Conflict between rule 29 and token MUL resolved as reduce (MUL < CHILDA).
+    Conflict between rule 29 and token DIV resolved as reduce (DIV < CHILDA).
+    Conflict between rule 29 and token MOD resolved as reduce (MOD < CHILDA).
+    Conflict between rule 29 and token ASSIGN resolved as reduce (ASSIGN < CHILDA).
+    Conflict between rule 29 and token ADD_ASSIGN resolved as reduce (ADD_ASSIGN < CHILDA).
+    Conflict between rule 29 and token SUB_ASSIGN resolved as reduce (SUB_ASSIGN < CHILDA).
+    Conflict between rule 29 and token MUL_ASSIGN resolved as reduce (MUL_ASSIGN < CHILDA).
+    Conflict between rule 29 and token DIV_ASSIGN resolved as reduce (DIV_ASSIGN < CHILDA).
+    Conflict between rule 29 and token MOD_ASSIGN resolved as reduce (MOD_ASSIGN < CHILDA).
+    Conflict between rule 29 and token EQUAL resolved as reduce (EQUAL < CHILDA).
+    Conflict between rule 29 and token NOTEQUAL resolved as reduce (NOTEQUAL < CHILDA).
+    Conflict between rule 29 and token GT resolved as reduce (GT < CHILDA).
+    Conflict between rule 29 and token GE resolved as reduce (GE < CHILDA).
+    Conflict between rule 29 and token LT resolved as reduce (LT < CHILDA).
+    Conflict between rule 29 and token LE resolved as reduce (LE < CHILDA).
+    Conflict between rule 29 and token LSHIFT resolved as reduce (LSHIFT < CHILDA).
+    Conflict between rule 29 and token RSHIFT resolved as reduce (RSHIFT < CHILDA).
+    Conflict between rule 29 and token BIT_AND resolved as reduce (BIT_AND < CHILDA).
+    Conflict between rule 29 and token BIT_OR resolved as reduce (BIT_OR < CHILDA).
+    Conflict between rule 29 and token LOGIC_AND resolved as reduce (LOGIC_AND < CHILDA).
+    Conflict between rule 29 and token LOGIC_OR resolved as reduce (LOGIC_OR < CHILDA).
+    Conflict between rule 29 and token EXC_OR resolved as reduce (EXC_OR < CHILDA).
 
 
 state 16
@@ -767,11 +803,13 @@ state 17
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -781,7 +819,7 @@ state 17
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 40
+    expression  go to state 42
     primary     go to state 10
 
 
@@ -813,11 +851,13 @@ state 18
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -827,7 +867,7 @@ state 18
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 41
+    expression  go to state 43
     primary     go to state 10
 
 
@@ -859,11 +899,13 @@ state 19
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -873,7 +915,7 @@ state 19
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 42
+    expression  go to state 44
     primary     go to state 10
 
 
@@ -905,11 +947,13 @@ state 20
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -919,7 +963,7 @@ state 20
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 43
+    expression  go to state 45
     primary     go to state 10
 
 
@@ -951,11 +995,13 @@ state 21
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -965,7 +1011,7 @@ state 21
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 44
+    expression  go to state 46
     primary     go to state 10
 
 
@@ -997,11 +1043,13 @@ state 22
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1011,7 +1059,7 @@ state 22
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 45
+    expression  go to state 47
     primary     go to state 10
 
 
@@ -1043,11 +1091,13 @@ state 23
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1057,7 +1107,7 @@ state 23
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 46
+    expression  go to state 48
     primary     go to state 10
 
 
@@ -1089,11 +1139,13 @@ state 24
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1103,7 +1155,7 @@ state 24
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 47
+    expression  go to state 49
     primary     go to state 10
 
 
@@ -1135,11 +1187,13 @@ state 25
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1149,7 +1203,7 @@ state 25
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 48
+    expression  go to state 50
     primary     go to state 10
 
 
@@ -1181,11 +1235,13 @@ state 26
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1195,7 +1251,7 @@ state 26
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 49
+    expression  go to state 51
     primary     go to state 10
 
 
@@ -1227,11 +1283,13 @@ state 27
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1241,7 +1299,7 @@ state 27
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 50
+    expression  go to state 52
     primary     go to state 10
 
 
@@ -1273,11 +1331,13 @@ state 28
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1287,7 +1347,7 @@ state 28
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 51
+    expression  go to state 53
     primary     go to state 10
 
 
@@ -1319,11 +1379,13 @@ state 29
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1333,7 +1395,7 @@ state 29
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 52
+    expression  go to state 54
     primary     go to state 10
 
 
@@ -1365,11 +1427,13 @@ state 30
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1379,7 +1443,7 @@ state 30
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 53
+    expression  go to state 55
     primary     go to state 10
 
 
@@ -1411,11 +1475,13 @@ state 31
    24           | expression GE . expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1425,7 +1491,7 @@ state 31
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 54
+    expression  go to state 56
     primary     go to state 10
 
 
@@ -1457,11 +1523,13 @@ state 32
    25           | . expression LT expression
    25           | expression LT . expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1471,7 +1539,7 @@ state 32
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 55
+    expression  go to state 57
     primary     go to state 10
 
 
@@ -1503,11 +1571,13 @@ state 33
    25           | . expression LT expression
    26           | . expression LE expression
    26           | expression LE . expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1517,11 +1587,107 @@ state 33
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 56
+    expression  go to state 58
     primary     go to state 10
 
 
 state 34
+
+    2 expression: . primary
+    3           | . ADD expression
+    4           | . SUB expression
+    5           | . expression ADD expression
+    6           | . expression SUB expression
+    7           | . expression MUL expression
+    8           | . expression DIV expression
+    9           | . expression MOD expression
+   10           | . expression BIT_OR expression
+   11           | . expression EQUAL expression
+   12           | . expression NOTEQUAL expression
+   13           | . expression BIT_AND expression
+   14           | . expression EXC_OR expression
+   15           | . expression LOGIC_OR expression
+   16           | . expression LOGIC_AND expression
+   17           | . expression ASSIGN expression
+   18           | . expression ADD_ASSIGN expression
+   19           | . expression SUB_ASSIGN expression
+   20           | . expression MUL_ASSIGN expression
+   21           | . expression DIV_ASSIGN expression
+   22           | . expression MOD_ASSIGN expression
+   23           | . expression GT expression
+   24           | . expression GE expression
+   25           | . expression LT expression
+   26           | . expression LE expression
+   27           | . expression LSHIFT expression
+   27           | expression LSHIFT . expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+    ADD     shift, and go to state 3
+    SUB     shift, and go to state 4
+    NOT     shift, and go to state 5
+    LP      shift, and go to state 6
+    CHILDA  shift, and go to state 7
+
+    expression  go to state 59
+    primary     go to state 10
+
+
+state 35
+
+    2 expression: . primary
+    3           | . ADD expression
+    4           | . SUB expression
+    5           | . expression ADD expression
+    6           | . expression SUB expression
+    7           | . expression MUL expression
+    8           | . expression DIV expression
+    9           | . expression MOD expression
+   10           | . expression BIT_OR expression
+   11           | . expression EQUAL expression
+   12           | . expression NOTEQUAL expression
+   13           | . expression BIT_AND expression
+   14           | . expression EXC_OR expression
+   15           | . expression LOGIC_OR expression
+   16           | . expression LOGIC_AND expression
+   17           | . expression ASSIGN expression
+   18           | . expression ADD_ASSIGN expression
+   19           | . expression SUB_ASSIGN expression
+   20           | . expression MUL_ASSIGN expression
+   21           | . expression DIV_ASSIGN expression
+   22           | . expression MOD_ASSIGN expression
+   23           | . expression GT expression
+   24           | . expression GE expression
+   25           | . expression LT expression
+   26           | . expression LE expression
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   28           | expression RSHIFT . expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+    ADD     shift, and go to state 3
+    SUB     shift, and go to state 4
+    NOT     shift, and go to state 5
+    LP      shift, and go to state 6
+    CHILDA  shift, and go to state 7
+
+    expression  go to state 60
+    primary     go to state 10
+
+
+state 36
 
     2 expression: . primary
     3           | . ADD expression
@@ -1549,11 +1715,13 @@ state 34
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1563,11 +1731,11 @@ state 34
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 57
+    expression  go to state 61
     primary     go to state 10
 
 
-state 35
+state 37
 
     2 expression: . primary
     3           | . ADD expression
@@ -1595,11 +1763,13 @@ state 35
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1609,11 +1779,11 @@ state 35
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 58
+    expression  go to state 62
     primary     go to state 10
 
 
-state 36
+state 38
 
     2 expression: . primary
     3           | . ADD expression
@@ -1641,11 +1811,13 @@ state 36
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1655,11 +1827,11 @@ state 36
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 59
+    expression  go to state 63
     primary     go to state 10
 
 
-state 37
+state 39
 
     2 expression: . primary
     3           | . ADD expression
@@ -1687,11 +1859,13 @@ state 37
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1701,11 +1875,11 @@ state 37
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 60
+    expression  go to state 64
     primary     go to state 10
 
 
-state 38
+state 40
 
     2 expression: . primary
     3           | . ADD expression
@@ -1733,11 +1907,13 @@ state 38
    24           | . expression GE expression
    25           | . expression LT expression
    26           | . expression LE expression
-   27           | . CHILDA expression
-   28           | . NOT expression
-   29           | . LP expression RP
-   30 primary: . INT
-   31        | . DOUBLE
+   27           | . expression LSHIFT expression
+   28           | . expression RSHIFT expression
+   29           | . CHILDA expression
+   30           | . NOT expression
+   31           | . LP expression RP
+   32 primary: . INT
+   33        | . DOUBLE
 
     INT     shift, and go to state 1
     DOUBLE  shift, and go to state 2
@@ -1747,21 +1923,21 @@ state 38
     LP      shift, and go to state 6
     CHILDA  shift, and go to state 7
 
-    expression  go to state 61
+    expression  go to state 65
     primary     go to state 10
 
 
-state 39
+state 41
 
-   29 expression: LP expression RP .
+   31 expression: LP expression RP .
 
-    $default  reduce using rule 29 (expression)
+    $default  reduce using rule 31 (expression)
 
 
-state 40
+state 42
 
-    5 expression: expression . ADD expression  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-    5           | expression ADD expression .  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    5 expression: expression . ADD expression  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    5           | expression ADD expression .  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
     6           | expression . SUB expression
     7           | expression . MUL expression
     8           | expression . DIV expression
@@ -1783,6 +1959,8 @@ state 40
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     MUL         shift, and go to state 19
     DIV         shift, and go to state 20
@@ -1813,6 +1991,8 @@ state 40
     Conflict between rule 5 and token GE resolved as reduce (GE < ADD).
     Conflict between rule 5 and token LT resolved as reduce (LT < ADD).
     Conflict between rule 5 and token LE resolved as reduce (LE < ADD).
+    Conflict between rule 5 and token LSHIFT resolved as reduce (LSHIFT < ADD).
+    Conflict between rule 5 and token RSHIFT resolved as reduce (RSHIFT < ADD).
     Conflict between rule 5 and token BIT_AND resolved as reduce (BIT_AND < ADD).
     Conflict between rule 5 and token BIT_OR resolved as reduce (BIT_OR < ADD).
     Conflict between rule 5 and token LOGIC_AND resolved as reduce (LOGIC_AND < ADD).
@@ -1820,11 +2000,11 @@ state 40
     Conflict between rule 5 and token EXC_OR resolved as reduce (EXC_OR < ADD).
 
 
-state 41
+state 43
 
     5 expression: expression . ADD expression
-    6           | expression . SUB expression  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-    6           | expression SUB expression .  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    6           | expression . SUB expression  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    6           | expression SUB expression .  [$end, ADD, SUB, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
     7           | expression . MUL expression
     8           | expression . DIV expression
     9           | expression . MOD expression
@@ -1845,6 +2025,8 @@ state 41
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     MUL         shift, and go to state 19
     DIV         shift, and go to state 20
@@ -1875,6 +2057,8 @@ state 41
     Conflict between rule 6 and token GE resolved as reduce (GE < SUB).
     Conflict between rule 6 and token LT resolved as reduce (LT < SUB).
     Conflict between rule 6 and token LE resolved as reduce (LE < SUB).
+    Conflict between rule 6 and token LSHIFT resolved as reduce (LSHIFT < SUB).
+    Conflict between rule 6 and token RSHIFT resolved as reduce (RSHIFT < SUB).
     Conflict between rule 6 and token BIT_AND resolved as reduce (BIT_AND < SUB).
     Conflict between rule 6 and token BIT_OR resolved as reduce (BIT_OR < SUB).
     Conflict between rule 6 and token LOGIC_AND resolved as reduce (LOGIC_AND < SUB).
@@ -1882,12 +2066,12 @@ state 41
     Conflict between rule 6 and token EXC_OR resolved as reduce (EXC_OR < SUB).
 
 
-state 42
+state 44
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
-    7           | expression . MUL expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-    7           | expression MUL expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    7           | expression . MUL expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    7           | expression MUL expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
     8           | expression . DIV expression
     9           | expression . MOD expression
    10           | expression . BIT_OR expression
@@ -1907,6 +2091,8 @@ state 42
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -1934,6 +2120,8 @@ state 42
     Conflict between rule 7 and token GE resolved as reduce (GE < MUL).
     Conflict between rule 7 and token LT resolved as reduce (LT < MUL).
     Conflict between rule 7 and token LE resolved as reduce (LE < MUL).
+    Conflict between rule 7 and token LSHIFT resolved as reduce (LSHIFT < MUL).
+    Conflict between rule 7 and token RSHIFT resolved as reduce (RSHIFT < MUL).
     Conflict between rule 7 and token BIT_AND resolved as reduce (BIT_AND < MUL).
     Conflict between rule 7 and token BIT_OR resolved as reduce (BIT_OR < MUL).
     Conflict between rule 7 and token LOGIC_AND resolved as reduce (LOGIC_AND < MUL).
@@ -1941,13 +2129,13 @@ state 42
     Conflict between rule 7 and token EXC_OR resolved as reduce (EXC_OR < MUL).
 
 
-state 43
+state 45
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
     7           | expression . MUL expression
-    8           | expression . DIV expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-    8           | expression DIV expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    8           | expression . DIV expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    8           | expression DIV expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
     9           | expression . MOD expression
    10           | expression . BIT_OR expression
    11           | expression . EQUAL expression
@@ -1966,6 +2154,8 @@ state 43
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -1993,6 +2183,8 @@ state 43
     Conflict between rule 8 and token GE resolved as reduce (GE < DIV).
     Conflict between rule 8 and token LT resolved as reduce (LT < DIV).
     Conflict between rule 8 and token LE resolved as reduce (LE < DIV).
+    Conflict between rule 8 and token LSHIFT resolved as reduce (LSHIFT < DIV).
+    Conflict between rule 8 and token RSHIFT resolved as reduce (RSHIFT < DIV).
     Conflict between rule 8 and token BIT_AND resolved as reduce (BIT_AND < DIV).
     Conflict between rule 8 and token BIT_OR resolved as reduce (BIT_OR < DIV).
     Conflict between rule 8 and token LOGIC_AND resolved as reduce (LOGIC_AND < DIV).
@@ -2000,14 +2192,14 @@ state 43
     Conflict between rule 8 and token EXC_OR resolved as reduce (EXC_OR < DIV).
 
 
-state 44
+state 46
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
     7           | expression . MUL expression
     8           | expression . DIV expression
-    9           | expression . MOD expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-    9           | expression MOD expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    9           | expression . MOD expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+    9           | expression MOD expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    10           | expression . BIT_OR expression
    11           | expression . EQUAL expression
    12           | expression . NOTEQUAL expression
@@ -2025,6 +2217,8 @@ state 44
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2052,6 +2246,8 @@ state 44
     Conflict between rule 9 and token GE resolved as reduce (GE < MOD).
     Conflict between rule 9 and token LT resolved as reduce (LT < MOD).
     Conflict between rule 9 and token LE resolved as reduce (LE < MOD).
+    Conflict between rule 9 and token LSHIFT resolved as reduce (LSHIFT < MOD).
+    Conflict between rule 9 and token RSHIFT resolved as reduce (RSHIFT < MOD).
     Conflict between rule 9 and token BIT_AND resolved as reduce (BIT_AND < MOD).
     Conflict between rule 9 and token BIT_OR resolved as reduce (BIT_OR < MOD).
     Conflict between rule 9 and token LOGIC_AND resolved as reduce (LOGIC_AND < MOD).
@@ -2059,7 +2255,7 @@ state 44
     Conflict between rule 9 and token EXC_OR resolved as reduce (EXC_OR < MOD).
 
 
-state 45
+state 47
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2073,8 +2269,8 @@ state 45
    14           | expression . EXC_OR expression
    15           | expression . LOGIC_OR expression
    16           | expression . LOGIC_AND expression
-   17           | expression . ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-   17           | expression ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   17           | expression . ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   17           | expression ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    18           | expression . ADD_ASSIGN expression
    19           | expression . SUB_ASSIGN expression
    20           | expression . MUL_ASSIGN expression
@@ -2084,6 +2280,8 @@ state 45
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2111,6 +2309,8 @@ state 45
     Conflict between rule 17 and token GE resolved as reduce (GE < ASSIGN).
     Conflict between rule 17 and token LT resolved as reduce (LT < ASSIGN).
     Conflict between rule 17 and token LE resolved as reduce (LE < ASSIGN).
+    Conflict between rule 17 and token LSHIFT resolved as reduce (LSHIFT < ASSIGN).
+    Conflict between rule 17 and token RSHIFT resolved as reduce (RSHIFT < ASSIGN).
     Conflict between rule 17 and token BIT_AND resolved as reduce (BIT_AND < ASSIGN).
     Conflict between rule 17 and token BIT_OR resolved as reduce (BIT_OR < ASSIGN).
     Conflict between rule 17 and token LOGIC_AND resolved as reduce (LOGIC_AND < ASSIGN).
@@ -2118,7 +2318,7 @@ state 45
     Conflict between rule 17 and token EXC_OR resolved as reduce (EXC_OR < ASSIGN).
 
 
-state 46
+state 48
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2133,8 +2333,8 @@ state 46
    15           | expression . LOGIC_OR expression
    16           | expression . LOGIC_AND expression
    17           | expression . ASSIGN expression
-   18           | expression . ADD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-   18           | expression ADD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   18           | expression . ADD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   18           | expression ADD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    19           | expression . SUB_ASSIGN expression
    20           | expression . MUL_ASSIGN expression
    21           | expression . DIV_ASSIGN expression
@@ -2143,6 +2343,8 @@ state 46
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2170,6 +2372,8 @@ state 46
     Conflict between rule 18 and token GE resolved as reduce (GE < ADD_ASSIGN).
     Conflict between rule 18 and token LT resolved as reduce (LT < ADD_ASSIGN).
     Conflict between rule 18 and token LE resolved as reduce (LE < ADD_ASSIGN).
+    Conflict between rule 18 and token LSHIFT resolved as reduce (LSHIFT < ADD_ASSIGN).
+    Conflict between rule 18 and token RSHIFT resolved as reduce (RSHIFT < ADD_ASSIGN).
     Conflict between rule 18 and token BIT_AND resolved as reduce (BIT_AND < ADD_ASSIGN).
     Conflict between rule 18 and token BIT_OR resolved as reduce (BIT_OR < ADD_ASSIGN).
     Conflict between rule 18 and token LOGIC_AND resolved as reduce (LOGIC_AND < ADD_ASSIGN).
@@ -2177,7 +2381,7 @@ state 46
     Conflict between rule 18 and token EXC_OR resolved as reduce (EXC_OR < ADD_ASSIGN).
 
 
-state 47
+state 49
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2193,8 +2397,8 @@ state 47
    16           | expression . LOGIC_AND expression
    17           | expression . ASSIGN expression
    18           | expression . ADD_ASSIGN expression
-   19           | expression . SUB_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-   19           | expression SUB_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   19           | expression . SUB_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   19           | expression SUB_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    20           | expression . MUL_ASSIGN expression
    21           | expression . DIV_ASSIGN expression
    22           | expression . MOD_ASSIGN expression
@@ -2202,6 +2406,8 @@ state 47
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2229,6 +2435,8 @@ state 47
     Conflict between rule 19 and token GE resolved as reduce (GE < SUB_ASSIGN).
     Conflict between rule 19 and token LT resolved as reduce (LT < SUB_ASSIGN).
     Conflict between rule 19 and token LE resolved as reduce (LE < SUB_ASSIGN).
+    Conflict between rule 19 and token LSHIFT resolved as reduce (LSHIFT < SUB_ASSIGN).
+    Conflict between rule 19 and token RSHIFT resolved as reduce (RSHIFT < SUB_ASSIGN).
     Conflict between rule 19 and token BIT_AND resolved as reduce (BIT_AND < SUB_ASSIGN).
     Conflict between rule 19 and token BIT_OR resolved as reduce (BIT_OR < SUB_ASSIGN).
     Conflict between rule 19 and token LOGIC_AND resolved as reduce (LOGIC_AND < SUB_ASSIGN).
@@ -2236,7 +2444,7 @@ state 47
     Conflict between rule 19 and token EXC_OR resolved as reduce (EXC_OR < SUB_ASSIGN).
 
 
-state 48
+state 50
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2253,14 +2461,16 @@ state 48
    17           | expression . ASSIGN expression
    18           | expression . ADD_ASSIGN expression
    19           | expression . SUB_ASSIGN expression
-   20           | expression . MUL_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-   20           | expression MUL_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   20           | expression . MUL_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   20           | expression MUL_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    21           | expression . DIV_ASSIGN expression
    22           | expression . MOD_ASSIGN expression
    23           | expression . GT expression
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2288,6 +2498,8 @@ state 48
     Conflict between rule 20 and token GE resolved as reduce (GE < MUL_ASSIGN).
     Conflict between rule 20 and token LT resolved as reduce (LT < MUL_ASSIGN).
     Conflict between rule 20 and token LE resolved as reduce (LE < MUL_ASSIGN).
+    Conflict between rule 20 and token LSHIFT resolved as reduce (LSHIFT < MUL_ASSIGN).
+    Conflict between rule 20 and token RSHIFT resolved as reduce (RSHIFT < MUL_ASSIGN).
     Conflict between rule 20 and token BIT_AND resolved as reduce (BIT_AND < MUL_ASSIGN).
     Conflict between rule 20 and token BIT_OR resolved as reduce (BIT_OR < MUL_ASSIGN).
     Conflict between rule 20 and token LOGIC_AND resolved as reduce (LOGIC_AND < MUL_ASSIGN).
@@ -2295,7 +2507,7 @@ state 48
     Conflict between rule 20 and token EXC_OR resolved as reduce (EXC_OR < MUL_ASSIGN).
 
 
-state 49
+state 51
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2313,13 +2525,15 @@ state 49
    18           | expression . ADD_ASSIGN expression
    19           | expression . SUB_ASSIGN expression
    20           | expression . MUL_ASSIGN expression
-   21           | expression . DIV_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-   21           | expression DIV_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   21           | expression . DIV_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   21           | expression DIV_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    22           | expression . MOD_ASSIGN expression
    23           | expression . GT expression
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2347,6 +2561,8 @@ state 49
     Conflict between rule 21 and token GE resolved as reduce (GE < DIV_ASSIGN).
     Conflict between rule 21 and token LT resolved as reduce (LT < DIV_ASSIGN).
     Conflict between rule 21 and token LE resolved as reduce (LE < DIV_ASSIGN).
+    Conflict between rule 21 and token LSHIFT resolved as reduce (LSHIFT < DIV_ASSIGN).
+    Conflict between rule 21 and token RSHIFT resolved as reduce (RSHIFT < DIV_ASSIGN).
     Conflict between rule 21 and token BIT_AND resolved as reduce (BIT_AND < DIV_ASSIGN).
     Conflict between rule 21 and token BIT_OR resolved as reduce (BIT_OR < DIV_ASSIGN).
     Conflict between rule 21 and token LOGIC_AND resolved as reduce (LOGIC_AND < DIV_ASSIGN).
@@ -2354,7 +2570,7 @@ state 49
     Conflict between rule 21 and token EXC_OR resolved as reduce (EXC_OR < DIV_ASSIGN).
 
 
-state 50
+state 52
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2373,12 +2589,14 @@ state 50
    19           | expression . SUB_ASSIGN expression
    20           | expression . MUL_ASSIGN expression
    21           | expression . DIV_ASSIGN expression
-   22           | expression . MOD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
-   22           | expression MOD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   22           | expression . MOD_ASSIGN expression  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   22           | expression MOD_ASSIGN expression .  [$end, ADD, SUB, MUL, DIV, MOD, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
    23           | expression . GT expression
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ASSIGN      shift, and go to state 22
     ADD_ASSIGN  shift, and go to state 23
@@ -2406,6 +2624,8 @@ state 50
     Conflict between rule 22 and token GE resolved as reduce (GE < MOD_ASSIGN).
     Conflict between rule 22 and token LT resolved as reduce (LT < MOD_ASSIGN).
     Conflict between rule 22 and token LE resolved as reduce (LE < MOD_ASSIGN).
+    Conflict between rule 22 and token LSHIFT resolved as reduce (LSHIFT < MOD_ASSIGN).
+    Conflict between rule 22 and token RSHIFT resolved as reduce (RSHIFT < MOD_ASSIGN).
     Conflict between rule 22 and token BIT_AND resolved as reduce (BIT_AND < MOD_ASSIGN).
     Conflict between rule 22 and token BIT_OR resolved as reduce (BIT_OR < MOD_ASSIGN).
     Conflict between rule 22 and token LOGIC_AND resolved as reduce (LOGIC_AND < MOD_ASSIGN).
@@ -2413,7 +2633,7 @@ state 50
     Conflict between rule 22 and token EXC_OR resolved as reduce (EXC_OR < MOD_ASSIGN).
 
 
-state 51
+state 53
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2438,6 +2658,8 @@ state 51
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2454,11 +2676,13 @@ state 51
     GE          shift, and go to state 31
     LT          shift, and go to state 32
     LE          shift, and go to state 33
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 11 (expression)
 
@@ -2479,6 +2703,8 @@ state 51
     Conflict between rule 11 and token GE resolved as shift (EQUAL < GE).
     Conflict between rule 11 and token LT resolved as shift (EQUAL < LT).
     Conflict between rule 11 and token LE resolved as shift (EQUAL < LE).
+    Conflict between rule 11 and token LSHIFT resolved as shift (EQUAL < LSHIFT).
+    Conflict between rule 11 and token RSHIFT resolved as shift (EQUAL < RSHIFT).
     Conflict between rule 11 and token BIT_AND resolved as shift (EQUAL < BIT_AND).
     Conflict between rule 11 and token BIT_OR resolved as shift (EQUAL < BIT_OR).
     Conflict between rule 11 and token LOGIC_AND resolved as shift (EQUAL < LOGIC_AND).
@@ -2486,7 +2712,7 @@ state 51
     Conflict between rule 11 and token EXC_OR resolved as shift (EQUAL < EXC_OR).
 
 
-state 52
+state 54
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2511,6 +2737,8 @@ state 52
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2527,11 +2755,13 @@ state 52
     GE          shift, and go to state 31
     LT          shift, and go to state 32
     LE          shift, and go to state 33
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 12 (expression)
 
@@ -2552,6 +2782,8 @@ state 52
     Conflict between rule 12 and token GE resolved as shift (NOTEQUAL < GE).
     Conflict between rule 12 and token LT resolved as shift (NOTEQUAL < LT).
     Conflict between rule 12 and token LE resolved as shift (NOTEQUAL < LE).
+    Conflict between rule 12 and token LSHIFT resolved as shift (NOTEQUAL < LSHIFT).
+    Conflict between rule 12 and token RSHIFT resolved as shift (NOTEQUAL < RSHIFT).
     Conflict between rule 12 and token BIT_AND resolved as shift (NOTEQUAL < BIT_AND).
     Conflict between rule 12 and token BIT_OR resolved as shift (NOTEQUAL < BIT_OR).
     Conflict between rule 12 and token LOGIC_AND resolved as shift (NOTEQUAL < LOGIC_AND).
@@ -2559,7 +2791,7 @@ state 52
     Conflict between rule 12 and token EXC_OR resolved as shift (NOTEQUAL < EXC_OR).
 
 
-state 53
+state 55
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2584,6 +2816,8 @@ state 53
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2596,11 +2830,13 @@ state 53
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 23 (expression)
 
@@ -2621,6 +2857,8 @@ state 53
     Conflict between rule 23 and token GE resolved as reduce (%left GE).
     Conflict between rule 23 and token LT resolved as reduce (%left LT).
     Conflict between rule 23 and token LE resolved as reduce (%left LE).
+    Conflict between rule 23 and token LSHIFT resolved as shift (GT < LSHIFT).
+    Conflict between rule 23 and token RSHIFT resolved as shift (GT < RSHIFT).
     Conflict between rule 23 and token BIT_AND resolved as shift (GT < BIT_AND).
     Conflict between rule 23 and token BIT_OR resolved as shift (GT < BIT_OR).
     Conflict between rule 23 and token LOGIC_AND resolved as shift (GT < LOGIC_AND).
@@ -2628,7 +2866,7 @@ state 53
     Conflict between rule 23 and token EXC_OR resolved as shift (GT < EXC_OR).
 
 
-state 54
+state 56
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2653,6 +2891,8 @@ state 54
    24           | expression GE expression .  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, RP]
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2665,11 +2905,13 @@ state 54
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 24 (expression)
 
@@ -2690,6 +2932,8 @@ state 54
     Conflict between rule 24 and token GE resolved as reduce (%left GE).
     Conflict between rule 24 and token LT resolved as reduce (%left LT).
     Conflict between rule 24 and token LE resolved as reduce (%left LE).
+    Conflict between rule 24 and token LSHIFT resolved as shift (GE < LSHIFT).
+    Conflict between rule 24 and token RSHIFT resolved as shift (GE < RSHIFT).
     Conflict between rule 24 and token BIT_AND resolved as shift (GE < BIT_AND).
     Conflict between rule 24 and token BIT_OR resolved as shift (GE < BIT_OR).
     Conflict between rule 24 and token LOGIC_AND resolved as shift (GE < LOGIC_AND).
@@ -2697,7 +2941,7 @@ state 54
     Conflict between rule 24 and token EXC_OR resolved as shift (GE < EXC_OR).
 
 
-state 55
+state 57
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2722,6 +2966,8 @@ state 55
    25           | expression . LT expression  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, RP]
    25           | expression LT expression .  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, RP]
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2734,11 +2980,13 @@ state 55
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 25 (expression)
 
@@ -2759,6 +3007,8 @@ state 55
     Conflict between rule 25 and token GE resolved as reduce (%left GE).
     Conflict between rule 25 and token LT resolved as reduce (%left LT).
     Conflict between rule 25 and token LE resolved as reduce (%left LE).
+    Conflict between rule 25 and token LSHIFT resolved as shift (LT < LSHIFT).
+    Conflict between rule 25 and token RSHIFT resolved as shift (LT < RSHIFT).
     Conflict between rule 25 and token BIT_AND resolved as shift (LT < BIT_AND).
     Conflict between rule 25 and token BIT_OR resolved as shift (LT < BIT_OR).
     Conflict between rule 25 and token LOGIC_AND resolved as shift (LT < LOGIC_AND).
@@ -2766,7 +3016,7 @@ state 55
     Conflict between rule 25 and token EXC_OR resolved as shift (LT < EXC_OR).
 
 
-state 56
+state 58
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2791,6 +3041,8 @@ state 56
    25           | expression . LT expression
    26           | expression . LE expression  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, RP]
    26           | expression LE expression .  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, RP]
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2803,11 +3055,13 @@ state 56
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_AND   shift, and go to state 36
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_AND   shift, and go to state 38
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 26 (expression)
 
@@ -2828,6 +3082,8 @@ state 56
     Conflict between rule 26 and token GE resolved as reduce (%left GE).
     Conflict between rule 26 and token LT resolved as reduce (%left LT).
     Conflict between rule 26 and token LE resolved as reduce (%left LE).
+    Conflict between rule 26 and token LSHIFT resolved as shift (LE < LSHIFT).
+    Conflict between rule 26 and token RSHIFT resolved as shift (LE < RSHIFT).
     Conflict between rule 26 and token BIT_AND resolved as shift (LE < BIT_AND).
     Conflict between rule 26 and token BIT_OR resolved as shift (LE < BIT_OR).
     Conflict between rule 26 and token LOGIC_AND resolved as shift (LE < LOGIC_AND).
@@ -2835,7 +3091,143 @@ state 56
     Conflict between rule 26 and token EXC_OR resolved as shift (LE < EXC_OR).
 
 
-state 57
+state 59
+
+    5 expression: expression . ADD expression
+    6           | expression . SUB expression
+    7           | expression . MUL expression
+    8           | expression . DIV expression
+    9           | expression . MOD expression
+   10           | expression . BIT_OR expression
+   11           | expression . EQUAL expression
+   12           | expression . NOTEQUAL expression
+   13           | expression . BIT_AND expression
+   14           | expression . EXC_OR expression
+   15           | expression . LOGIC_OR expression
+   16           | expression . LOGIC_AND expression
+   17           | expression . ASSIGN expression
+   18           | expression . ADD_ASSIGN expression
+   19           | expression . SUB_ASSIGN expression
+   20           | expression . MUL_ASSIGN expression
+   21           | expression . DIV_ASSIGN expression
+   22           | expression . MOD_ASSIGN expression
+   23           | expression . GT expression
+   24           | expression . GE expression
+   25           | expression . LT expression
+   26           | expression . LE expression
+   27           | expression . LSHIFT expression  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   27           | expression LSHIFT expression .  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   28           | expression . RSHIFT expression
+
+    ADD         shift, and go to state 17
+    SUB         shift, and go to state 18
+    MUL         shift, and go to state 19
+    DIV         shift, and go to state 20
+    MOD         shift, and go to state 21
+    ASSIGN      shift, and go to state 22
+    ADD_ASSIGN  shift, and go to state 23
+    SUB_ASSIGN  shift, and go to state 24
+    MUL_ASSIGN  shift, and go to state 25
+    DIV_ASSIGN  shift, and go to state 26
+    MOD_ASSIGN  shift, and go to state 27
+
+    $default  reduce using rule 27 (expression)
+
+    Conflict between rule 27 and token ADD resolved as shift (LSHIFT < ADD).
+    Conflict between rule 27 and token SUB resolved as shift (LSHIFT < SUB).
+    Conflict between rule 27 and token MUL resolved as shift (LSHIFT < MUL).
+    Conflict between rule 27 and token DIV resolved as shift (LSHIFT < DIV).
+    Conflict between rule 27 and token MOD resolved as shift (LSHIFT < MOD).
+    Conflict between rule 27 and token ASSIGN resolved as shift (LSHIFT < ASSIGN).
+    Conflict between rule 27 and token ADD_ASSIGN resolved as shift (LSHIFT < ADD_ASSIGN).
+    Conflict between rule 27 and token SUB_ASSIGN resolved as shift (LSHIFT < SUB_ASSIGN).
+    Conflict between rule 27 and token MUL_ASSIGN resolved as shift (LSHIFT < MUL_ASSIGN).
+    Conflict between rule 27 and token DIV_ASSIGN resolved as shift (LSHIFT < DIV_ASSIGN).
+    Conflict between rule 27 and token MOD_ASSIGN resolved as shift (LSHIFT < MOD_ASSIGN).
+    Conflict between rule 27 and token EQUAL resolved as reduce (EQUAL < LSHIFT).
+    Conflict between rule 27 and token NOTEQUAL resolved as reduce (NOTEQUAL < LSHIFT).
+    Conflict between rule 27 and token GT resolved as reduce (GT < LSHIFT).
+    Conflict between rule 27 and token GE resolved as reduce (GE < LSHIFT).
+    Conflict between rule 27 and token LT resolved as reduce (LT < LSHIFT).
+    Conflict between rule 27 and token LE resolved as reduce (LE < LSHIFT).
+    Conflict between rule 27 and token LSHIFT resolved as reduce (%left LSHIFT).
+    Conflict between rule 27 and token RSHIFT resolved as reduce (%left RSHIFT).
+    Conflict between rule 27 and token BIT_AND resolved as reduce (BIT_AND < LSHIFT).
+    Conflict between rule 27 and token BIT_OR resolved as reduce (BIT_OR < LSHIFT).
+    Conflict between rule 27 and token LOGIC_AND resolved as reduce (LOGIC_AND < LSHIFT).
+    Conflict between rule 27 and token LOGIC_OR resolved as reduce (LOGIC_OR < LSHIFT).
+    Conflict between rule 27 and token EXC_OR resolved as reduce (EXC_OR < LSHIFT).
+
+
+state 60
+
+    5 expression: expression . ADD expression
+    6           | expression . SUB expression
+    7           | expression . MUL expression
+    8           | expression . DIV expression
+    9           | expression . MOD expression
+   10           | expression . BIT_OR expression
+   11           | expression . EQUAL expression
+   12           | expression . NOTEQUAL expression
+   13           | expression . BIT_AND expression
+   14           | expression . EXC_OR expression
+   15           | expression . LOGIC_OR expression
+   16           | expression . LOGIC_AND expression
+   17           | expression . ASSIGN expression
+   18           | expression . ADD_ASSIGN expression
+   19           | expression . SUB_ASSIGN expression
+   20           | expression . MUL_ASSIGN expression
+   21           | expression . DIV_ASSIGN expression
+   22           | expression . MOD_ASSIGN expression
+   23           | expression . GT expression
+   24           | expression . GE expression
+   25           | expression . LT expression
+   26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+   28           | expression RSHIFT expression .  [$end, EQUAL, NOTEQUAL, GT, GE, LT, LE, LSHIFT, RSHIFT, BIT_AND, BIT_OR, LOGIC_AND, LOGIC_OR, RP, EXC_OR]
+
+    ADD         shift, and go to state 17
+    SUB         shift, and go to state 18
+    MUL         shift, and go to state 19
+    DIV         shift, and go to state 20
+    MOD         shift, and go to state 21
+    ASSIGN      shift, and go to state 22
+    ADD_ASSIGN  shift, and go to state 23
+    SUB_ASSIGN  shift, and go to state 24
+    MUL_ASSIGN  shift, and go to state 25
+    DIV_ASSIGN  shift, and go to state 26
+    MOD_ASSIGN  shift, and go to state 27
+
+    $default  reduce using rule 28 (expression)
+
+    Conflict between rule 28 and token ADD resolved as shift (RSHIFT < ADD).
+    Conflict between rule 28 and token SUB resolved as shift (RSHIFT < SUB).
+    Conflict between rule 28 and token MUL resolved as shift (RSHIFT < MUL).
+    Conflict between rule 28 and token DIV resolved as shift (RSHIFT < DIV).
+    Conflict between rule 28 and token MOD resolved as shift (RSHIFT < MOD).
+    Conflict between rule 28 and token ASSIGN resolved as shift (RSHIFT < ASSIGN).
+    Conflict between rule 28 and token ADD_ASSIGN resolved as shift (RSHIFT < ADD_ASSIGN).
+    Conflict between rule 28 and token SUB_ASSIGN resolved as shift (RSHIFT < SUB_ASSIGN).
+    Conflict between rule 28 and token MUL_ASSIGN resolved as shift (RSHIFT < MUL_ASSIGN).
+    Conflict between rule 28 and token DIV_ASSIGN resolved as shift (RSHIFT < DIV_ASSIGN).
+    Conflict between rule 28 and token MOD_ASSIGN resolved as shift (RSHIFT < MOD_ASSIGN).
+    Conflict between rule 28 and token EQUAL resolved as reduce (EQUAL < RSHIFT).
+    Conflict between rule 28 and token NOTEQUAL resolved as reduce (NOTEQUAL < RSHIFT).
+    Conflict between rule 28 and token GT resolved as reduce (GT < RSHIFT).
+    Conflict between rule 28 and token GE resolved as reduce (GE < RSHIFT).
+    Conflict between rule 28 and token LT resolved as reduce (LT < RSHIFT).
+    Conflict between rule 28 and token LE resolved as reduce (LE < RSHIFT).
+    Conflict between rule 28 and token LSHIFT resolved as reduce (%left LSHIFT).
+    Conflict between rule 28 and token RSHIFT resolved as reduce (%left RSHIFT).
+    Conflict between rule 28 and token BIT_AND resolved as reduce (BIT_AND < RSHIFT).
+    Conflict between rule 28 and token BIT_OR resolved as reduce (BIT_OR < RSHIFT).
+    Conflict between rule 28 and token LOGIC_AND resolved as reduce (LOGIC_AND < RSHIFT).
+    Conflict between rule 28 and token LOGIC_OR resolved as reduce (LOGIC_OR < RSHIFT).
+    Conflict between rule 28 and token EXC_OR resolved as reduce (EXC_OR < RSHIFT).
+
+
+state 61
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2860,6 +3252,8 @@ state 57
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2872,8 +3266,10 @@ state 57
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_OR      shift, and go to state 35
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_OR      shift, and go to state 37
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 13 (expression)
 
@@ -2894,6 +3290,8 @@ state 57
     Conflict between rule 13 and token GE resolved as reduce (GE < BIT_AND).
     Conflict between rule 13 and token LT resolved as reduce (LT < BIT_AND).
     Conflict between rule 13 and token LE resolved as reduce (LE < BIT_AND).
+    Conflict between rule 13 and token LSHIFT resolved as shift (BIT_AND < LSHIFT).
+    Conflict between rule 13 and token RSHIFT resolved as shift (BIT_AND < RSHIFT).
     Conflict between rule 13 and token BIT_AND resolved as reduce (%left BIT_AND).
     Conflict between rule 13 and token BIT_OR resolved as shift (BIT_AND < BIT_OR).
     Conflict between rule 13 and token LOGIC_AND resolved as reduce (LOGIC_AND < BIT_AND).
@@ -2901,7 +3299,7 @@ state 57
     Conflict between rule 13 and token EXC_OR resolved as shift (BIT_AND < EXC_OR).
 
 
-state 58
+state 62
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2926,6 +3324,8 @@ state 58
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -2938,7 +3338,9 @@ state 58
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 10 (expression)
 
@@ -2959,6 +3361,8 @@ state 58
     Conflict between rule 10 and token GE resolved as reduce (GE < BIT_OR).
     Conflict between rule 10 and token LT resolved as reduce (LT < BIT_OR).
     Conflict between rule 10 and token LE resolved as reduce (LE < BIT_OR).
+    Conflict between rule 10 and token LSHIFT resolved as shift (BIT_OR < LSHIFT).
+    Conflict between rule 10 and token RSHIFT resolved as shift (BIT_OR < RSHIFT).
     Conflict between rule 10 and token BIT_AND resolved as reduce (BIT_AND < BIT_OR).
     Conflict between rule 10 and token BIT_OR resolved as reduce (%left BIT_OR).
     Conflict between rule 10 and token LOGIC_AND resolved as reduce (LOGIC_AND < BIT_OR).
@@ -2966,7 +3370,7 @@ state 58
     Conflict between rule 10 and token EXC_OR resolved as shift (BIT_OR < EXC_OR).
 
 
-state 59
+state 63
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -2991,6 +3395,8 @@ state 59
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -3003,10 +3409,12 @@ state 59
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    LOGIC_OR    shift, and go to state 37
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    LOGIC_OR    shift, and go to state 39
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 16 (expression)
 
@@ -3027,6 +3435,8 @@ state 59
     Conflict between rule 16 and token GE resolved as reduce (GE < LOGIC_AND).
     Conflict between rule 16 and token LT resolved as reduce (LT < LOGIC_AND).
     Conflict between rule 16 and token LE resolved as reduce (LE < LOGIC_AND).
+    Conflict between rule 16 and token LSHIFT resolved as shift (LOGIC_AND < LSHIFT).
+    Conflict between rule 16 and token RSHIFT resolved as shift (LOGIC_AND < RSHIFT).
     Conflict between rule 16 and token BIT_AND resolved as shift (LOGIC_AND < BIT_AND).
     Conflict between rule 16 and token BIT_OR resolved as shift (LOGIC_AND < BIT_OR).
     Conflict between rule 16 and token LOGIC_AND resolved as reduce (%left LOGIC_AND).
@@ -3034,7 +3444,7 @@ state 59
     Conflict between rule 16 and token EXC_OR resolved as shift (LOGIC_AND < EXC_OR).
 
 
-state 60
+state 64
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -3059,6 +3469,8 @@ state 60
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -3071,9 +3483,11 @@ state 60
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
-    BIT_AND     shift, and go to state 34
-    BIT_OR      shift, and go to state 35
-    EXC_OR      shift, and go to state 38
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
+    BIT_AND     shift, and go to state 36
+    BIT_OR      shift, and go to state 37
+    EXC_OR      shift, and go to state 40
 
     $default  reduce using rule 15 (expression)
 
@@ -3094,6 +3508,8 @@ state 60
     Conflict between rule 15 and token GE resolved as reduce (GE < LOGIC_OR).
     Conflict between rule 15 and token LT resolved as reduce (LT < LOGIC_OR).
     Conflict between rule 15 and token LE resolved as reduce (LE < LOGIC_OR).
+    Conflict between rule 15 and token LSHIFT resolved as shift (LOGIC_OR < LSHIFT).
+    Conflict between rule 15 and token RSHIFT resolved as shift (LOGIC_OR < RSHIFT).
     Conflict between rule 15 and token BIT_AND resolved as shift (LOGIC_OR < BIT_AND).
     Conflict between rule 15 and token BIT_OR resolved as shift (LOGIC_OR < BIT_OR).
     Conflict between rule 15 and token LOGIC_AND resolved as reduce (LOGIC_AND < LOGIC_OR).
@@ -3101,7 +3517,7 @@ state 60
     Conflict between rule 15 and token EXC_OR resolved as shift (LOGIC_OR < EXC_OR).
 
 
-state 61
+state 65
 
     5 expression: expression . ADD expression
     6           | expression . SUB expression
@@ -3126,6 +3542,8 @@ state 61
    24           | expression . GE expression
    25           | expression . LT expression
    26           | expression . LE expression
+   27           | expression . LSHIFT expression
+   28           | expression . RSHIFT expression
 
     ADD         shift, and go to state 17
     SUB         shift, and go to state 18
@@ -3138,6 +3556,8 @@ state 61
     MUL_ASSIGN  shift, and go to state 25
     DIV_ASSIGN  shift, and go to state 26
     MOD_ASSIGN  shift, and go to state 27
+    LSHIFT      shift, and go to state 34
+    RSHIFT      shift, and go to state 35
 
     $default  reduce using rule 14 (expression)
 
@@ -3158,6 +3578,8 @@ state 61
     Conflict between rule 14 and token GE resolved as reduce (GE < EXC_OR).
     Conflict between rule 14 and token LT resolved as reduce (LT < EXC_OR).
     Conflict between rule 14 and token LE resolved as reduce (LE < EXC_OR).
+    Conflict between rule 14 and token LSHIFT resolved as shift (EXC_OR < LSHIFT).
+    Conflict between rule 14 and token RSHIFT resolved as shift (EXC_OR < RSHIFT).
     Conflict between rule 14 and token BIT_AND resolved as reduce (BIT_AND < EXC_OR).
     Conflict between rule 14 and token BIT_OR resolved as reduce (BIT_OR < EXC_OR).
     Conflict between rule 14 and token LOGIC_AND resolved as reduce (LOGIC_AND < EXC_OR).

@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) { 
-    printf("%d", (int)(-(4 + 4)));
-    fflush(stdout);
+    int a = (int)(-(4 + 4));
+    printf("%d", a);
+    printf("\n");
     return 0;
 }

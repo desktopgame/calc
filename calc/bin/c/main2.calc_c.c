@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) { 
-    printf("%d", (int)(20 - 10 - 20));
-    fflush(stdout);
+    int a = (int)(20 - 10 - 20);
+    printf("%d", a);
+    printf("\n");
     return 0;
 }
