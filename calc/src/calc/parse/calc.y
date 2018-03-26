@@ -15,6 +15,7 @@
 %token <ast_value>			DOUBLE
 %token 	ADD SUB MUL DIV MOD
 		ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
+		AND_ASSIGN OR_ASSIGN LSHIFT_ASSIGN RSHIFT_ASSIGN EXC_OR_ASSIGN
 		EQUAL NOTEQUAL INC DEC
 		GT GE LT LE LSHIFT RSHIFT
 		NOT BIT_AND BIT_OR LOGIC_AND LOGIC_OR LP RP
@@ -32,7 +33,7 @@
 %left ADD SUB
 %left MUL DIV MOD
 %left NEGATIVE POSITIVE
-%right ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN
+%right ASSIGN ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN AND_ASSIGN OR_ASSIGN LSHIFT_ASSIGN RSHIFT_ASSIGN EXC_OR_ASSIGN
 %right CHILDA NOT
 %%
 program
@@ -102,27 +103,47 @@ expression
 	}
 	| expression ASSIGN expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_assign, $1, $3);
 	}
 	| expression ADD_ASSIGN expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_add_assign, $1, $3);
 	}
 	| expression SUB_ASSIGN expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_sub_assign, $1, $3);
 	}
 	| expression MUL_ASSIGN expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_mul_assign, $1, $3);
 	}
 	| expression DIV_ASSIGN expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_div_assign, $1, $3);
 	}
 	| expression MOD_ASSIGN expression
 	{
-		$$ = ast_new_binary(ast_bit_and, $1, $3);
+		$$ = ast_new_binary(ast_mod_assign, $1, $3);
+	}
+	| expression AND_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_and_assign, $1, $3);
+	}
+	| expression OR_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_or_assign, $1, $3);
+	}
+	| expression EXC_OR_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_exc_or_assign, $1, $3);
+	}
+	| expression LSHIFT_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_lshift_assign, $1, $3);
+	}
+	| expression RSHIFT_ASSIGN expression
+	{
+		$$ = ast_new_binary(ast_rshift_assign, $1, $3);
 	}
 	| expression GT expression
 	{

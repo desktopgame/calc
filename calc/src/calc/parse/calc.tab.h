@@ -52,28 +52,33 @@
      MUL_ASSIGN = 268,
      DIV_ASSIGN = 269,
      MOD_ASSIGN = 270,
-     EQUAL = 271,
-     NOTEQUAL = 272,
-     INC = 273,
-     DEC = 274,
-     GT = 275,
-     GE = 276,
-     LT = 277,
-     LE = 278,
-     LSHIFT = 279,
-     RSHIFT = 280,
-     NOT = 281,
-     BIT_AND = 282,
-     BIT_OR = 283,
-     LOGIC_AND = 284,
-     LOGIC_OR = 285,
-     LP = 286,
-     RP = 287,
-     EXC_OR = 288,
-     IDENT = 289,
-     POSITIVE = 290,
-     NEGATIVE = 291,
-     CHILDA = 292
+     AND_ASSIGN = 271,
+     OR_ASSIGN = 272,
+     LSHIFT_ASSIGN = 273,
+     RSHIFT_ASSIGN = 274,
+     EXC_OR_ASSIGN = 275,
+     EQUAL = 276,
+     NOTEQUAL = 277,
+     INC = 278,
+     DEC = 279,
+     GT = 280,
+     GE = 281,
+     LT = 282,
+     LE = 283,
+     LSHIFT = 284,
+     RSHIFT = 285,
+     NOT = 286,
+     BIT_AND = 287,
+     BIT_OR = 288,
+     LOGIC_AND = 289,
+     LOGIC_OR = 290,
+     LP = 291,
+     RP = 292,
+     EXC_OR = 293,
+     IDENT = 294,
+     POSITIVE = 295,
+     NEGATIVE = 296,
+     CHILDA = 297
    };
 #endif
 /* Tokens.  */
@@ -90,28 +95,33 @@
 #define MUL_ASSIGN 268
 #define DIV_ASSIGN 269
 #define MOD_ASSIGN 270
-#define EQUAL 271
-#define NOTEQUAL 272
-#define INC 273
-#define DEC 274
-#define GT 275
-#define GE 276
-#define LT 277
-#define LE 278
-#define LSHIFT 279
-#define RSHIFT 280
-#define NOT 281
-#define BIT_AND 282
-#define BIT_OR 283
-#define LOGIC_AND 284
-#define LOGIC_OR 285
-#define LP 286
-#define RP 287
-#define EXC_OR 288
-#define IDENT 289
-#define POSITIVE 290
-#define NEGATIVE 291
-#define CHILDA 292
+#define AND_ASSIGN 271
+#define OR_ASSIGN 272
+#define LSHIFT_ASSIGN 273
+#define RSHIFT_ASSIGN 274
+#define EXC_OR_ASSIGN 275
+#define EQUAL 276
+#define NOTEQUAL 277
+#define INC 278
+#define DEC 279
+#define GT 280
+#define GE 281
+#define LT 282
+#define LE 283
+#define LSHIFT 284
+#define RSHIFT 285
+#define NOT 286
+#define BIT_AND 287
+#define BIT_OR 288
+#define LOGIC_AND 289
+#define LOGIC_OR 290
+#define LP 291
+#define RP 292
+#define EXC_OR 293
+#define IDENT 294
+#define POSITIVE 295
+#define NEGATIVE 296
+#define CHILDA 297
 
 
 
@@ -124,7 +134,7 @@ typedef union YYSTYPE
 	char* svalue;
 }
 /* Line 1529 of yacc.c.  */
-#line 128 "calc.tab.h"
+#line 138 "calc.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

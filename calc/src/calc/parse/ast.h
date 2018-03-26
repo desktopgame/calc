@@ -43,6 +43,12 @@ typedef enum ast_tag {
 	ast_div_assign,
 	ast_mod_assign,
 
+	ast_and_assign,
+	ast_or_assign,
+	ast_exc_or_assign,
+	ast_lshift_assign,
+	ast_rshift_assign
+
 } ast_tag;
 
 typedef struct ast {
