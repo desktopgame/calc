@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
+#include <unistd.h>
 #include "parse/parser.h"
 #include "util/string_buffer.h"
 
@@ -138,7 +139,7 @@ void runall() {
 	const char* dirname = ".";
 	DIR *dir = opendir(dirname);
 	struct dirent *dp;
-	struct stat fi;
+	//struct stat fi;
 
 	for (dp = readdir(dir); dp != NULL; dp = readdir(dir)) {
 		if (dp->d_name[0] != '.') {
@@ -155,6 +156,35 @@ void runall() {
 }
 
 int main(int argc, char* argv[]) {
-	for(int i=0; i<3; i++) runall();
+	int opt;
+	while ((opt = getopt(argc, argv, "td:e:")) != -1) {
+		switch (opt) {
+			//test
+			case 't':
+				for(int i=0; i<3; i++) {
+					runall();
+				}
+				break;
+			//dump source
+			case 'd':
+			{
+				ast* a = parse_from_source(optarg);
+				ast_dump(ast_first(a));
+				ast_delete(a);
+				break;
+			}
+			//eval source
+			case 'e':
+			{
+				ast* a = parse_from_source(optarg);
+				printf("%lf\n", ast_eval(ast_first(a)));
+				ast_delete(a);
+				break;
+			}
+			default:
+				printf("error! \'%c\' \'%c\'\n", opt, optopt);
+				return 1;
+		}
+	}
 	return 0;
 }

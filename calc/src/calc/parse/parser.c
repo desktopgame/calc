@@ -36,7 +36,7 @@ ast* parse_from_file(const char* filename) {
 }
 
 ast* parse_from_source(const char* source) {
-	gParserInputTag = parser_input_from_file;
+	gParserInputTag = parser_input_from_source;
 	parser_stdout_swap_begin();
 	extern void yy_setstr(char *source);
 	extern void yy_clearstr();

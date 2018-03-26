@@ -10,7 +10,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/calc/bin/a.out",
-			"args": [],
+			"args": ["-t"],
 			"stopAtEntry": false,
 			"targetArchitecture": "x64",
 			"cwd": "${workspaceFolder}/calc/bin/",
