@@ -35,51 +35,51 @@
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     INT = 258,
-     DOUBLE = 259,
-     ADD = 260,
-     SUB = 261,
-     MUL = 262,
-     DIV = 263,
-     MOD = 264,
-     ASSIGN = 265,
-     ADD_ASSIGN = 266,
-     SUB_ASSIGN = 267,
-     MUL_ASSIGN = 268,
-     DIV_ASSIGN = 269,
-     MOD_ASSIGN = 270,
-     AND_ASSIGN = 271,
-     OR_ASSIGN = 272,
-     LSHIFT_ASSIGN = 273,
-     RSHIFT_ASSIGN = 274,
-     EXC_OR_ASSIGN = 275,
-     EQUAL = 276,
-     NOTEQUAL = 277,
-     INC = 278,
-     DEC = 279,
-     GT = 280,
-     GE = 281,
-     LT = 282,
-     LE = 283,
-     LSHIFT = 284,
-     RSHIFT = 285,
-     NOT = 286,
-     BIT_AND = 287,
-     BIT_OR = 288,
-     LOGIC_AND = 289,
-     LOGIC_OR = 290,
-     LP = 291,
-     RP = 292,
-     EXC_OR = 293,
-     IDENT = 294,
-     POSITIVE = 295,
-     NEGATIVE = 296,
-     CHILDA = 297
-   };
+#define YYTOKENTYPE
+/* Put the tokens into the symbol table, so that GDB and other debuggers
+   know about them.  */
+enum yytokentype {
+        INT = 258,
+        DOUBLE = 259,
+        ADD = 260,
+        SUB = 261,
+        MUL = 262,
+        DIV = 263,
+        MOD = 264,
+        ASSIGN = 265,
+        ADD_ASSIGN = 266,
+        SUB_ASSIGN = 267,
+        MUL_ASSIGN = 268,
+        DIV_ASSIGN = 269,
+        MOD_ASSIGN = 270,
+        AND_ASSIGN = 271,
+        OR_ASSIGN = 272,
+        LSHIFT_ASSIGN = 273,
+        RSHIFT_ASSIGN = 274,
+        EXC_OR_ASSIGN = 275,
+        EQUAL = 276,
+        NOTEQUAL = 277,
+        INC = 278,
+        DEC = 279,
+        GT = 280,
+        GE = 281,
+        LT = 282,
+        LE = 283,
+        LSHIFT = 284,
+        RSHIFT = 285,
+        NOT = 286,
+        BIT_AND = 287,
+        BIT_OR = 288,
+        LOGIC_AND = 289,
+        LOGIC_OR = 290,
+        LP = 291,
+        RP = 292,
+        EXC_OR = 293,
+        IDENT = 294,
+        POSITIVE = 295,
+        NEGATIVE = 296,
+        CHILDA = 297
+};
 #endif
 /* Tokens.  */
 #define INT 258
@@ -123,37 +123,33 @@
 #define NEGATIVE 296
 #define CHILDA 297
 
-
-
-
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+#if !defined YYSTYPE && !defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 #line 8 "calc.y"
 {
-	ast* ast_value;
-	char* svalue;
+        ast* ast_value;
+        char* svalue;
 }
 /* Line 1529 of yacc.c.  */
 #line 138 "calc.tab.h"
-	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
-# define YYSTYPE_IS_TRIVIAL 1
+YYSTYPE;
+#define yystype YYSTYPE /* obsolescent; will be withdrawn */
+#define YYSTYPE_IS_DECLARED 1
+#define YYSTYPE_IS_TRIVIAL 1
 #endif
 
 extern YYSTYPE yylval;
 
-#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
-typedef struct YYLTYPE
-{
-  int first_line;
-  int first_column;
-  int last_line;
-  int last_column;
+#if !defined YYLTYPE && !defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE {
+        int first_line;
+        int first_column;
+        int last_line;
+        int last_column;
 } YYLTYPE;
-# define yyltype YYLTYPE /* obsolescent; will be withdrawn */
-# define YYLTYPE_IS_DECLARED 1
-# define YYLTYPE_IS_TRIVIAL 1
+#define yyltype YYLTYPE /* obsolescent; will be withdrawn */
+#define YYLTYPE_IS_DECLARED 1
+#define YYLTYPE_IS_TRIVIAL 1
 #endif
 
 extern YYLTYPE yylloc;

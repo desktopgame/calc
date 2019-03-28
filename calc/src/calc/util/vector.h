@@ -1,9 +1,9 @@
 #pragma once
 #ifndef SIGNAL_UTIL_VECTOR_H
 #define SIGNAL_UTIL_VECTOR_H
-#include <stdlib.h>
 #include <stdbool.h>
-//NOTE: beacon からの移植
+#include <stdlib.h>
+// NOTE: beacon からの移植
 
 /**
  * ベクターの要素を表す型.
@@ -15,19 +15,18 @@ typedef void* vector_item;
  * 0/NULLを格納することが出来ます。
  */
 typedef struct vector {
-	//使用されている長さ
-	int length;
-	//余分に確保された分も含めた長さ
-	int capacity;
-	//要素一つ分のサイズ
-	//vector_slot_size_t slotSize;
-	vector_item* memory;
+        //使用されている長さ
+        int length;
+        //余分に確保された分も含めた長さ
+        int capacity;
+        //要素一つ分のサイズ
+        // vector_slot_size_t slotSize;
+        vector_item* memory;
 } vector;
 
 /**
- * vecの中の全ての要素を type へキャストして、 item へ代入しながら { ... } の内側を実行します.
- * type型で、itemを事前に宣言している必要があります。
- * <code>
+ * vecの中の全ての要素を type へキャストして、 item へ代入しながら { ... }
+ *の内側を実行します. type型で、itemを事前に宣言している必要があります。 <code>
  *	vector* v = vector_new();
  *	vector_push(v, 10);
  *	vector_push(v, 20);
@@ -41,17 +40,15 @@ typedef struct vector {
  * @param item
  * @param vec
  */
-#define VFOREACH(vindex, type, item, vvec) \
-	for(int vindex=0, item=(type)vector_at(vvec, vindex); \
-		vindex<(vvec->length); \
-		item=(type)vector_at(vvec, ++vindex) \
-	) \
+#define VFOREACH(vindex, type, item, vvec)                         \
+        for (int vindex = 0, item = (type)vector_at(vvec, vindex); \
+             vindex < (vvec->length); item = (type)vector_at(vvec, ++vindex))
 
 /**
  * ベクターのデリータ関数です.
  * @param item
  */
-typedef void(*vector_element_deleter)(vector_item item);
+typedef void (*vector_element_deleter)(vector_item item);
 
 /**
  * ベクターを作成します.
@@ -142,7 +139,7 @@ bool vector_empty(vector* self);
  */
 int vector_find(vector* self, vector_item item);
 
-/** 
+/**
  * 先頭から検索して一致するものがあるなら true を返します.
  * @param self
  * @param item
@@ -174,4 +171,4 @@ void vector_deleter_free(vector_item item);
  * @param item
  */
 void vector_deleter_null(vector_item item);
-#endif // !SIGNAL_UTIL_VECTOR_H
+#endif  // !SIGNAL_UTIL_VECTOR_H

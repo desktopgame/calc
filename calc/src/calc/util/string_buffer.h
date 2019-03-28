@@ -13,9 +13,9 @@ typedef char char_t;
  * 文字を格納する場合はこちらを使用します。
  */
 typedef struct string_buffer {
-	int length;
-	int capacity;
-	char_t* text;
+        int length;
+        int capacity;
+        char_t* text;
 } string_buffer;
 
 /**
@@ -60,7 +60,8 @@ void string_buffer_appendf(string_buffer* self, const char* message, ...);
  * @param message
  * @param ap
  */
-void string_buffer_vappendf(string_buffer* self, const char* message, va_list ap);
+void string_buffer_vappendf(string_buffer* self, const char* message,
+                            va_list ap);
 
 /**
  * 全て追記します.
@@ -94,4 +95,4 @@ void string_buffer_shrink(string_buffer* self);
  * @param self
  */
 void string_buffer_delete(string_buffer* self);
-#endif // !SIGNAL_UTIL_STRING_BUFFER_H
+#endif  // !SIGNAL_UTIL_STRING_BUFFER_H

@@ -3,62 +3,62 @@
 #include "../util/vector.h"
 
 typedef enum ast_tag {
-	ast_root,
-	ast_int,
-	ast_double,
-	ast_ident,
+        ast_root,
+        ast_int,
+        ast_double,
+        ast_ident,
 
-	ast_pos,
-	ast_neg,
-	ast_childa,
-	ast_not,
+        ast_pos,
+        ast_neg,
+        ast_childa,
+        ast_not,
 
-	ast_add,
-	ast_sub,
-	ast_mul,
-	ast_div,
-	ast_mod,
+        ast_add,
+        ast_sub,
+        ast_mul,
+        ast_div,
+        ast_mod,
 
-	ast_bit_and,
-	ast_bit_or,
-	ast_logic_and,
-	ast_logic_or,
-	ast_exc_or,
+        ast_bit_and,
+        ast_bit_or,
+        ast_logic_and,
+        ast_logic_or,
+        ast_exc_or,
 
-	ast_lshift,
-	ast_rshift,
+        ast_lshift,
+        ast_rshift,
 
-	ast_gt,
-	ast_ge,
-	ast_lt,
-	ast_le,
+        ast_gt,
+        ast_ge,
+        ast_lt,
+        ast_le,
 
-	ast_equal,
-	ast_notequal,
+        ast_equal,
+        ast_notequal,
 
-	ast_assign,
-	ast_add_assign,
-	ast_sub_assign,
-	ast_mul_assign,
-	ast_div_assign,
-	ast_mod_assign,
+        ast_assign,
+        ast_add_assign,
+        ast_sub_assign,
+        ast_mul_assign,
+        ast_div_assign,
+        ast_mod_assign,
 
-	ast_and_assign,
-	ast_or_assign,
-	ast_exc_or_assign,
-	ast_lshift_assign,
-	ast_rshift_assign
+        ast_and_assign,
+        ast_or_assign,
+        ast_exc_or_assign,
+        ast_lshift_assign,
+        ast_rshift_assign
 
 } ast_tag;
 
 typedef struct ast {
-	union {
-		int ivalue;
-		double dvalue;
-		char* svalue;
-	} u;
-	vector* children;
-	ast_tag tag;
+        union {
+                int ivalue;
+                double dvalue;
+                char* svalue;
+        } u;
+        vector* children;
+        ast_tag tag;
 } ast;
 
 ast* ast_new(ast_tag tag);
