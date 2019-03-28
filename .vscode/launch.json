@@ -4,13 +4,15 @@
 	// 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-		
 		{
 			"name": "cpp Launch",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/calc/bin/a.out",
-			"args": ["-t"],
+			"args": [
+				"-e",
+				"12 + 5 * 2"
+			],
 			"stopAtEntry": false,
 			"targetArchitecture": "x64",
 			"cwd": "${workspaceFolder}/calc/bin/",
